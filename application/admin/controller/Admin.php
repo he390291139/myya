@@ -24,8 +24,7 @@ class Admin extends Base
      */
     public function index()
     {
-        //todo 可能存在分页错误，后面再改
-        $list = Db::name('admin')->field('id,username,email,nickname,status,createTime')->paginate($this->pageNum);
+        $list = $this->model->field('id,username,email,nickname,status,createTime')->paginate($this->pageNum);
         $page = $list->render();
         $count = $this->model->count('id');
         $this->assign('list', $list);
@@ -63,48 +62,21 @@ class Admin extends Base
     }
 
     /**
-     * 保存新建的资源
-     *
-     * @param  \think\Request  $request
-     * @return \think\Response
-     */
-    public function save(Request $request)
-    {
-        //
-    }
-
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
-    }
-
-    /**
      * 显示编辑资源表单页.
      *
      * @param  int  $id
      * @return \think\Response
      */
+
+     //todo 权限验证及修改提交还没做
     public function edit($id)
     {
-        //
-    }
+        if($this->request->isPost()){
 
-    /**
-     * 保存更新的资源
-     *
-     * @param  \think\Request  $request
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        }
+        $user = $this->model->get($id);
+        $this->assign('user',$user);
+        return $this->view->fetch();
     }
 
     /**
@@ -113,9 +85,16 @@ class Admin extends Base
      * @param  int  $id
      * @return \think\Response
      */
-    public function delete($id)
+    public function delete($ids =null)
     {
-        //
+        if($this->request->isPost()){
+            $res = $this->model->destroy($ids);
+            if($res)
+                return json(true);
+            else
+                return json(false);
+        }
+        return json("不允许操作");
     }
 
     public function status($id = null,$status = null){

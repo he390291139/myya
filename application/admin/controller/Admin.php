@@ -2,8 +2,7 @@
 
 namespace app\admin\controller;
 
-use think\Request;
-use think\Db;
+use think\Validate;
 use app\admin\model\Admin as AdminModel;
 
 class Admin extends Base
@@ -22,8 +21,12 @@ class Admin extends Base
      *
      * @return \think\Response
      */
-    public function index()
+    public function index(
     {
+        if ($this->request->isPost()){
+            
+            return $this->view->fetch();
+        }
         $list = $this->model->field('id,username,email,nickname,status,createTime')->paginate($this->pageNum);
         $page = $list->render();
         $count = $this->model->count('id');
@@ -38,7 +41,19 @@ class Admin extends Base
         if ($this->request->isPost()){
             
             $param = $this->request->param();
-            
+
+            $validate = new Validate([
+                'nickname' => 'require|min:4|max:16' ,
+                'username' => 'require|min:4|max:16',
+                'email'    => 'require|email',
+                'password' => 'require|min:6',
+                'status'   => 'require',
+            ]);
+
+            if (!$validate->check($param)) {
+                return json($validate->getError());
+            }
+        
             $res = $this->model->get(['username' => $param['username']]);
             if ($res)
                 return json("该用户已存在");
@@ -68,11 +83,25 @@ class Admin extends Base
      * @return \think\Response
      */
 
-     //todo 权限验证及修改提交还没做
     public function edit($id)
     {
         if($this->request->isPost()){
-
+            $param = $this->request->param();
+            
+            $validate = new Validate([
+                'nickname' => 'require|min:4|max:16' ,
+                'email'    => 'require|email',
+                'status'   => 'require',
+            ]);
+            if (!$validate->check($param)) {
+                return json($validate->getError());
+            }
+            $res = $this->model->allowField(['nickname','email','status'])->save($param,['id' => $param['id']]);
+            if($res)
+                return json(true);
+            else{
+                return json(false);
+            }
         }
         $user = $this->model->get($id);
         $this->assign('user',$user);

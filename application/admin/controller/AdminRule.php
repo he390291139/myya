@@ -5,7 +5,7 @@ namespace app\admin\controller;
 use think\Validate;
 use app\admin\model\Admin as AdminModel;
 
-class Admin extends Base
+class AdminRule extends Base
 {
     protected $pageNum = "10";
 

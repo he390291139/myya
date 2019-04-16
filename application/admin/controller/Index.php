@@ -7,6 +7,7 @@ use app\admin\model\Admin;
 
 class Index extends Base
 {
+
     public function index()
     {
         return $this->view->fetch();
@@ -23,6 +24,9 @@ class Index extends Base
      * @return void
      */
     public function login(){
+
+        $path = $this->request->path();
+
         if($this->request->isPost()){
             $param = $this->request->param();
             $username = $param['name'];
@@ -44,9 +48,14 @@ class Index extends Base
             $admin = Admin::get(['username' => $param['name']]);
             if(!$admin)
                 return $this->error('用户不存在！请重新输入！');
+            if(!$this->auth->check($path,$admin['id']))   
+                return $this->error('you have no permission!');
+            if($admin['status'] == 1)
+                return $this->error('用户已被禁用，请联系超级管理员！');
             if($admin['password']==getPassword($password,$admin['salt']))
             {
-                session('admin','admin');
+                session('admin',$username);
+                session('admin_id',$admin['id']);
                 return $this->success("欢迎您！$username",url('admin/index/index'),'','3');
             }
             return $this->error('密码填写错误','','',3);

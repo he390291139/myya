@@ -70,13 +70,6 @@ class Admin extends Base
         return $this->view->fetch();
     }
 
-    /**
-     * 显示编辑资源表单页.
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-
     public function edit($id)
     {
         if($this->request->isPost()){

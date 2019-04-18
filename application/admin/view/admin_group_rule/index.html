@@ -1,0 +1,79 @@
+{extend name="public/base" /}
+
+{block name="seo"}
+<title>{$title|default='权限管理'}</title>
+<meta name="keywords" content="{$keywords|default='页面关键字'}">
+<meta name="description" content="{$description|default='页面描述'}">
+<style>
+	.page{
+		text-align: right;
+		font-size: 18px;
+	}
+	.page li{
+		display: inline-block;
+		padding: 20px 10px;
+	}
+	.page .active{
+		color: rgb(40,102,197);
+	}
+</style>
+{/block}
+
+{block name="content"}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 权限管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="7">权限管理</th>
+			</tr>
+			<tr class="text-c">
+				<th><input type="checkbox" name="" value=""></th>
+				<th>ID</th>
+				<th>权限名称</th>
+				<th>字段名</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{volist name='list' id='user'}
+			<tr>{$user}</tr>
+			<tr class="text-c">
+					<td><input type="checkbox" value="1" name=""></td>
+					<td>{$user.nickname}</td>
+					<td>{$user.username}</td>
+					<td>{$user.title}</td>
+				</tr>
+			{/volist}
+		</tbody>
+	</table>
+</div>
+
+{/block}
+
+{block name="js"}
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript">
+
+/*管理员-权限-删除*/
+function admin_permission_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '',
+			dataType: 'json',
+			success: function(data){
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+</script>
+{/block}

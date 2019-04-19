@@ -84,7 +84,7 @@ function admin_permission_del(obj,ids,groupid){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '/index.php/admin/admingroup/delete/ids/'+ids+'/groupid/'+groupid,
+			url: '/index.php/admin/admin_group/delete/ids/'+ids+'/groupid/'+groupid,
 			dataType: 'json',
 			success: function(data){
 				if (data == true){

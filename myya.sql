@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 16/04/2019 20:09:40
+ Date: 21/04/2019 17:25:35
 */
 
 SET NAMES utf8mb4;
@@ -66,15 +66,16 @@ CREATE TABLE `myya_auth_group` (
   `title` char(100) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `rules` char(80) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `title` (`title`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of myya_auth_group
 -- ----------------------------
 BEGIN;
-INSERT INTO `myya_auth_group` VALUES (1, '超级管理员组', 1, '1');
-INSERT INTO `myya_auth_group` VALUES (2, '二级管理员', 1, '');
+INSERT INTO `myya_auth_group` VALUES (1, '超级管理员组', 1, '1,2,3,4');
+INSERT INTO `myya_auth_group` VALUES (2, '二级管理员', 1, '1');
 INSERT INTO `myya_auth_group` VALUES (3, '三级管理员', 1, '');
 COMMIT;
 
@@ -95,6 +96,7 @@ CREATE TABLE `myya_auth_group_access` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `myya_auth_group_access` VALUES (1, 1);
+INSERT INTO `myya_auth_group_access` VALUES (2, 2);
 COMMIT;
 
 -- ----------------------------
@@ -117,6 +119,26 @@ CREATE TABLE `myya_auth_rule` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `myya_auth_rule` VALUES (1, 'admin/index/login', '后台登录', 1, 1, '');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for myya_site_info
+-- ----------------------------
+DROP TABLE IF EXISTS `myya_site_info`;
+CREATE TABLE `myya_site_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of myya_site_info
+-- ----------------------------
+BEGIN;
+INSERT INTO `myya_site_info` VALUES (1, 'site_title', '名医医案管理系统', 'site');
+INSERT INTO `myya_site_info` VALUES (2, 'site_key_word', '名医医案管理系统', 'site');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

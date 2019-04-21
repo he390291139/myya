@@ -14,6 +14,7 @@ class Index extends Base
     }
 
     public function welcome(){
+        cache('site_title');
 
         return $this->view->fetch();
     }

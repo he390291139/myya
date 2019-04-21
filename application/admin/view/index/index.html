@@ -2,7 +2,7 @@
 <html>
 <head>
 	{include file="public/meta" /}
-<title>H-ui.admin v3.1</title>
+<title>{:getSiteInfo('site_title')}</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
@@ -81,27 +81,34 @@ function article_add(title,url){
 	});
 	layer.full(index);
 }
-/*图片-添加*/
-function picture_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-/*产品-添加*/
-function product_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
 /*用户-添加*/
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);
+}
+
+function clearCache(){
+	layer.confirm('确认要清除缓存吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '/index.php/admin/System/clearCache',
+			dataType: 'json',
+			success: function(data){
+				if (data == true){
+					window.location.reload();
+					layer.msg('已删除!',{icon:1,time:1000});
+				}
+				else if(data == false){
+					layer.msg("删除失败！",{icon:5,time:1000});
+				}
+				else{
+					layer.msg(data,{icon:5,time:1000});
+				}
+			},
+			error:function(data) {
+				layer.msg(data,{icon:5,time:1000});
+			},
+		});		
+	});
 }
 
 

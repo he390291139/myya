@@ -20,11 +20,9 @@ class AdminGroupRule extends Base
      */
     public function index()
     {
-        // $list = $this->model->paginate($this->pageNum);
-        $list = Db::name('auth_group_access')->alias('a')->join('myya_admin b','a.uid = b.id')->join('myya_auth_group c','a.group_id = c.id')
-        ->paginate($this->pageNum);
+
+        $list = $this->model->paginate($this->pageNum);
         $page = $list->render();
-        // dump($list);
         $this->assign('list', $list);
         $this->assign('page', $page);
         return $this->view->fetch();

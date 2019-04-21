@@ -41,10 +41,6 @@ class AdminGroup extends Base
         return $this->view->fetch();
     }
 
-    public function alterGroup(){
-
-    }
-
     public function add(){
         $user = Admin::all(function($query){
             $query->field('id,username');
@@ -71,6 +67,45 @@ class AdminGroup extends Base
         $this->assign('groupList',$groupList);
         return $this->view->fetch();
 
+    }
+
+    public function edit($uid,$group_id){
+        $user = $this->model
+                    ->with(['admin'=>function($query){
+                            $query->withField('nickname,username');
+                            $query->field('nickname,username');
+                        },'auth'=>function($query){
+                            $query->withField('title');
+                            $query->field('title');}])
+                    ->where('uid','=',$uid)->where('group_id','=',$group_id)->find();
+        $this->assign('user',$user);
+
+        $groupList = AdminGroupRule::all(function($query){
+            $query->field('id,title');
+        });
+        $this->assign('groupList',$groupList);
+        $this->assign('group_id',$group_id);
+
+        if($this->request->isPost()){
+            $param = $this->request->param();
+
+            if($param['group_id']==$param['group_id_old'])
+                return json(true);
+
+            $res = $this->model->where('uid','=',$param['uid'])->where('group_id','=',$param['group_id'])->find();
+            if($res)
+                return json("已存在该权限");
+
+            $res = $this->model->save(['uid'=>$param['uid'],'group_id'=>$param['group_id']]);
+ 
+            if($res){
+                $this->model->where('uid','=',$param['uid'])->where('group_id','=',$param['group_id_old'])->where('group_id','<>','1')->delete();
+                return json(true);
+            }
+            else
+                return json($res);
+        }
+        return $this->view->fetch();
     }
 
     public function delete($ids,$groupid){

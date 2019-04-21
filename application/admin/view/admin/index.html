@@ -27,7 +27,6 @@
 		<span class="l">
 			<a href="javascript:;" onclick="window.location.reload()" class="btn btn-primary btn-refresh radius"><i class="Hui-iconfont">&#xe68f;</i> 刷新</a>
 			<a href="javascript:;" onclick="admin_add('添加管理员','{:url('admin/admin/add')}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
-			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
 		</span> 
 		<span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
 	<table class="table table-border table-bordered table-bg">
@@ -41,7 +40,6 @@
 				<th>昵称</th>
 				<th>登录名</th>
 				<th>邮箱</th>
-				<th>角色</th>
 				<th>加入时间</th>
 				<th>是否已启用</th>
 				<th>操作</th>
@@ -55,7 +53,6 @@
 					<td>{$user.nickname}</td>
 					<td>{$user.username}</td>
 					<td>{$user.email}</td>
-					<td>超级管理员</td>
 					<td>{$user.createTime}</td>
 					<td class="td-status">
 						{if condition="$user.status == 1 "} <a onClick="admin_start(this,{$user.id},{$user.status})" href="javascript:;" title="点击启用" style="text-decoration:none"><span class="label label-default radius">已停用</span></a>

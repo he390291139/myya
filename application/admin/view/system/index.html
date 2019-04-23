@@ -16,6 +16,16 @@
 	.page .active{
 		color: rgb(40,102,197);
 	}
+    .tabBar ul li{
+        background-color: #e8e8e8;
+        cursor: pointer;
+        display: inline-block;
+        float: right;
+        font-weight: bold;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 15px;
+    }
 </style>
 {/block}
 
@@ -25,17 +35,17 @@
 	系统管理
 	<span class="c-gray en">&gt;</span>
 	基本设置
-	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:window.location.reload();" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
 		<div id="tab-system" class="HuiTab">
 			<div class="tabBar cl">
 				<span>基本设置</span>
                 <span>其他设置</span>
-                <ul class="cl">	
-                        <a class="r" href="javascript:;" onclick="window.location.reload()" class=""><i class="Hui-iconfont">&#xe68f;</i> 刷新</a>
-                        <a class="r" href="javascript:;" onclick="admin_permission_add('添加权限','{:url('admin/adminGroup/add')}','','310')" class=""><i class="Hui-iconfont">&#xe600;</i> 添加权限</a></span> 
-                        <li class="r">共有数据：<strong>{$count}</strong> 条</li> 
+                <ul class="cl">	 
+                        <li class="r">共有数据：<strong>{$count}</strong> 条</li>
+                        <li><a class="r" href="javascript:;" onclick="system_add('添加配置','{:url('admin/system/add')}','','310')"><i class="Hui-iconfont">&#xe600;</i> 添加配置</a></li>
+                        <li><a class="r btn-refresh" href="javascript:;" onclick="window.location.reload()" ><i class="Hui-iconfont">&#xe68f;</i> 刷新</a></li>
                 </ul>
 			</div>
 			<div class="tabCon">
@@ -46,27 +56,30 @@
                             </tr>
                             <tr class="text-c">
                                 <th><input type="checkbox" name="" value=""></th>
-                                <th>昵称</th>
-                                <th>用户名</th>
-                                <th>所属管理组</th>
+                                <th>ID</th>
+                                <th>关键字</th>
+                                <th>值</th>
+                                <th>描述</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {volist name='list' id='user'}
+                            {volist name='list' id='list'}
                             <tr class="text-c">
                                     <td><input type="checkbox" value="1" name=""></td>
-                                    <td>{$user}</td>
-                                    <td>{$user}</td>
-                                    <td>{$user}</td>
+                                    <td>{$list.id}</td>
+                                    <td>{$list.key}</td>
+                                    <td>{$list.value}</td>
+                                    <td>{$list.description}</td>
                                     <td>
-                                        <a title="编辑" href="javascript:;" onclick="admin_permission_edit('权限编辑','{:url('admin/adminGroup/edit',['uid'=>$user,'group_id'=>$user])}','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
-                                        <a title="删除" href="javascript:;" onclick="admin_permission_del(this,{$user},{$user})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+                                        <a title="编辑" href="javascript:;" onclick="system_edit('编辑','{:url('admin/system/edit',['id'=>$list.id])}','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
+                                        <a title="删除" href="javascript:;" onclick="system_del(this,{$list.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
                                     </td>
                                 </tr>
                             {/volist}
                         </tbody>
                     </table>
+
 			</div>
 			<div class="tabCon">
                 <table class="table table-border table-bordered table-bg">
@@ -76,14 +89,27 @@
                             </tr>
                             <tr class="text-c">
                                 <th><input type="checkbox" name="" value=""></th>
-                                <th>昵称</th>
-                                <th>用户名</th>
-                                <th>所属管理组</th>
+                                <th>ID</th>
+                                <th>关键字</th>
+                                <th>值</th>
+                                <th>描述</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            {volist name='list1' id='list1'}
+                            <tr class="text-c">
+                                    <td><input type="checkbox" value="1" name=""></td>
+                                    <td>{$list1.id}</td>
+                                    <td>{$list1.key}</td>
+                                    <td>{$list1.value}</td>
+                                    <td>{$list1.description}</td>
+                                    <td>
+                                        <a title="编辑" href="javascript:;" onclick="system_edit('编辑','{:url('admin/system/edit',['id'=>$list.id])}','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
+                                        <a title="删除" href="javascript:;" onclick="system_del(this,{$list1.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+                                    </td>
+                                </tr>
+                            {/volist}
                         </tbody>
                     </table>
 			</div>
@@ -118,19 +144,19 @@
 	h		弹出层高度（缺省调默认值）
 */
 /*管理员-权限-添加*/
-function admin_permission_add(title,url,w,h){
+function system_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 /*管理员-权限-编辑*/
-function admin_permission_edit(title,url,w,h){
+function system_edit(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 /*管理员-权限-删除*/
-function admin_permission_del(obj,ids,groupid){
+function system_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '/index.php/admin/admin_group/delete/ids/'+ids+'/groupid/'+groupid,
+			url: '/index.php/admin/system/delete/id/'+id,
 			dataType: 'json',
 			success: function(data){
 				if (data == true){

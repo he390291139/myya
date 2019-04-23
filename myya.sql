@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 21/04/2019 17:25:35
+ Date: 23/04/2019 20:25:25
 */
 
 SET NAMES utf8mb4;
@@ -112,14 +112,31 @@ CREATE TABLE `myya_auth_rule` (
   `condition` char(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of myya_auth_rule
 -- ----------------------------
 BEGIN;
 INSERT INTO `myya_auth_rule` VALUES (1, 'admin/index/login', '后台登录', 1, 1, '');
+INSERT INTO `myya_auth_rule` VALUES (2, 'admin/system/index', '系统设置', 1, 1, '');
 COMMIT;
+
+-- ----------------------------
+-- Table structure for myya_doctor
+-- ----------------------------
+DROP TABLE IF EXISTS `myya_doctor`;
+CREATE TABLE `myya_doctor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL COMMENT '姓名',
+  `experience` varchar(255) DEFAULT NULL COMMENT '个人经历',
+  `scholastic` varchar(255) DEFAULT NULL COMMENT '学术成就',
+  `honorary` varchar(255) DEFAULT NULL COMMENT '荣誉称号',
+  `book` varchar(255) DEFAULT NULL COMMENT '著作',
+  `good_at_disease` varchar(255) DEFAULT NULL COMMENT '擅长疾病',
+  `img` varchar(255) DEFAULT NULL COMMENT '图片',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for myya_site_info
@@ -129,16 +146,71 @@ CREATE TABLE `myya_site_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `key` varchar(255) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
-  `type` varchar(20) DEFAULT NULL,
+  `type` varchar(20) DEFAULT 'other' COMMENT '类型',
+  `description` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of myya_site_info
 -- ----------------------------
 BEGIN;
-INSERT INTO `myya_site_info` VALUES (1, 'site_title', '名医医案管理系统', 'site');
-INSERT INTO `myya_site_info` VALUES (2, 'site_key_word', '名医医案管理系统', 'site');
+INSERT INTO `myya_site_info` VALUES (1, 'site_title', '名医医案管理系统', 'site', '网站名称');
+INSERT INTO `myya_site_info` VALUES (2, 'site_key_word', '名医医案管理系统', 'site', '网站关键字');
+INSERT INTO `myya_site_info` VALUES (3, 'site_description', '名医医案管理', 'site', '网站描述');
+INSERT INTO `myya_site_info` VALUES (4, '123', 'ads', 'other', NULL);
 COMMIT;
+
+-- ----------------------------
+-- Table structure for myya_user
+-- ----------------------------
+DROP TABLE IF EXISTS `myya_user`;
+CREATE TABLE `myya_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `createTime` int(10) DEFAULT NULL,
+  `updateTime` int(10) DEFAULT NULL,
+  `deleteTime` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for myya_ya
+-- ----------------------------
+DROP TABLE IF EXISTS `myya_ya`;
+CREATE TABLE `myya_ya` (
+  `id` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `doctor_id` int(11) DEFAULT NULL,
+  `patient_name` varchar(255) DEFAULT NULL,
+  `patient_age` varchar(255) DEFAULT NULL,
+  `patient_status` varchar(255) DEFAULT NULL,
+  `patient_sex` varchar(255) DEFAULT NULL,
+  `diagnose_first_time` int(11) DEFAULT NULL,
+  `symptom` varchar(255) DEFAULT NULL,
+  `medial_history` varchar(255) DEFAULT NULL,
+  `carves_diagnosis` varchar(255) DEFAULT NULL,
+  `tcm_diagnosis` varchar(255) DEFAULT NULL,
+  `wes_diagnosis` varchar(255) DEFAULT NULL,
+  `diseases` varchar(255) DEFAULT NULL,
+  `therapeutic_principle_and_method` varchar(255) DEFAULT NULL,
+  `prescription` varchar(255) DEFAULT NULL,
+  `prescription_composition` varchar(255) DEFAULT NULL,
+  `doctor_advice` varchar(255) DEFAULT NULL,
+  `diagnosis_second` varchar(255) DEFAULT NULL,
+  `diagnosis_second_recipe` varchar(255) DEFAULT NULL,
+  `diagnosis_third` varchar(255) DEFAULT NULL,
+  `diagnosis_third_recipe` varchar(255) DEFAULT NULL,
+  `diagnosis_fourth` varchar(255) DEFAULT NULL,
+  `diagnosis_fourth_recipe` varchar(255) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `imgs` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  `source` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

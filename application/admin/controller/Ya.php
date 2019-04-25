@@ -2,11 +2,18 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
 use think\Request;
+use app\admin\model\Ya as yian;
 
-class Ya extends Controller
+class Ya extends Base
 {
+    protected $pageNum = "10";
+
+    public function _initialize()
+    {
+        parent::_initialize();
+        $this->model = new yian();
+    }
     /**
      * 显示资源列表
      *
@@ -14,7 +21,13 @@ class Ya extends Controller
      */
     public function index()
     {
-        //
+        $list = $this->model->paginate($this->pageNum);
+        $page = $list->render();
+        $count = $this->model->count('id');
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        $this->assign('count', $count);
+        return $this->view->fetch();
     }
 
     /**

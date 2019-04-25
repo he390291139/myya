@@ -1,0 +1,123 @@
+{extend name="public/base" /}
+
+{block name="seo"}
+<title>{$title|default='管理员列表'}</title>
+<meta name="keywords" content="{$keywords|default='页面关键字'}">
+<meta name="description" content="{$description|default='页面描述'}">
+<style>
+	.page{
+		text-align: right;
+		font-size: 18px;
+	}
+	.page li{
+		display: inline-block;
+		padding: 20px 10px;
+	}
+	.page .active{
+		color: rgb(40,102,197);
+	}
+</style>
+{/block}
+
+{block name="content"}
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray"> 
+		<span class="l">
+			<a href="javascript:;" onclick="window.location.reload()" class="btn btn-primary btn-refresh radius"><i class="Hui-iconfont">&#xe68f;</i> 刷新</a>
+			<a href="javascript:;" onclick="admin_add('添加管理员','{:url('admin/admin/add')}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+		</span> 
+		<span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="9">管理员列表</th>
+			</tr>
+			<tr class="text-c">
+				<th><input type="checkbox" name="" value=""></th>
+				<th>ID</th>
+				<th>昵称</th>
+				<th>登录名</th>
+				<th>邮箱</th>
+				<th>加入时间</th>
+				<th>是否已启用</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{volist name='list' id='user'}
+			<tr class="text-c">
+					<td><input type="checkbox" value="1" name=""></td>
+					<td>{$user}</td>
+					<td>{$user}</td>
+					<td>{$user}</td>
+					<td>{$user}</td>
+					<td>{$user}</td>
+
+					<td class="td-manage">
+						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{:url('admin/admin/edit',['id'=>$user])}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
+						<a title="删除" href="javascript:;" onclick="admin_del(this,{$user})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
+				</tr>
+			{/volist}
+			
+		</tbody>
+			
+	</table>
+	<div class="page">{$page}</div>
+</div>
+
+{/block}
+
+{block name="js"}
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-增加*/
+function admin_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*管理员-删除*/
+function admin_del(obj,ids){
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '/index.php/admin/admin/delete/ids/'+ids,
+			dataType: 'json',
+			success: function(data){
+				if (data == true){
+					// $(obj).parents("tr").remove();
+					window.location.reload();
+					layer.msg('已删除!',{icon:1,time:1000});
+				}
+				else if(data == false){
+					layer.msg("删除失败！",{icon:5,time:1000});
+				}
+				else{
+					layer.msg(data,{icon:5,time:1000});
+				}
+			},
+			error:function(data) {
+				layer.msg(data,{icon:5,time:1000});
+			},
+		});		
+	});
+}
+
+/*管理员-编辑*/
+function admin_edit(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+</script>
+{/block}

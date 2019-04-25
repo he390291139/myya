@@ -2,11 +2,18 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
 use think\Request;
+use app\admin\model\Doctor as docto;
 
-class Doctor extends Controller
+class Doctor extends Base
 {
+    protected $pageNum = "10";
+
+    public function _initialize()
+    {
+        parent::_initialize();
+        $this->model = new docto();
+    }
     /**
      * 显示资源列表
      *
@@ -14,7 +21,7 @@ class Doctor extends Controller
      */
     public function index()
     {
-        //
+        return $this->view->fetch();
     }
 
     /**

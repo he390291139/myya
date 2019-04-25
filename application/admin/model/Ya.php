@@ -6,5 +6,5 @@ use think\Model;
 
 class Ya extends Model
 {
-    //
+    protected $name = 'ya';
 }

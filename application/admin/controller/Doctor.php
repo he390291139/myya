@@ -35,13 +35,14 @@ class Doctor extends Base
             $res = $this->model->get(['name' => $param['name']]);
             if ($res)
                 return json("该医生已存在，如重名请添加区别标记");
+            global $imgUrl;
+            global $imgerror;
             // 获取表单上传文件
             if(!$param['img'] == ''){
                 $file = request()->file('img');
                 // 移动到框架应用根目录/public/uploads/ 目录下
                 $info = $file->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads');
-                global $imgUrl;
-                global $imgerror;
+
                 if($info){
                     // 成功上传后 获取上传信息
                      $imgUrl =  $info->getSaveName();
@@ -50,6 +51,9 @@ class Doctor extends Base
                     $imgerror =  $file->getError();
                 }
                 $param['img'] = $imgUrl;
+            }
+            if (!is_null($imgerror)){
+                return json($imgerror);
             }
             $this->model->data($param);
             $res = $this->model->save();

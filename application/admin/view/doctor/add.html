@@ -28,31 +28,31 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>个人经历：</label>
             <div class="formControls col-xs-8 col-sm-6">
-                <textarea class="textarea radius" name="experience"></textarea>
+                <textarea class="textarea radius" name="experience" autocomplete="off" ></textarea>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学术成就：</label>
             <div class="formControls col-xs-8 col-sm-6">
-                <textarea class="textarea radius" name="scholastic"></textarea>
+                <textarea class="textarea radius" name="scholastic" autocomplete="off" ></textarea>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>荣誉称号：</label>
             <div class="formControls col-xs-8 col-sm-6">
-                <textarea class="textarea radius" name="honorary"></textarea>
+                <textarea class="textarea radius" name="honorary" autocomplete="off" ></textarea>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>著作：</label>
             <div class="formControls col-xs-8 col-sm-6">
-                <textarea class="textarea radius" name="book"></textarea>
+                <textarea class="textarea radius" name="book" autocomplete="off" ></textarea>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>擅长疾病：</label>
             <div class="formControls col-xs-8 col-sm-6">
-                <textarea class="textarea radius" name="good_at_disease"></textarea>
+                <textarea class="textarea radius" name="good_at_disease" autocomplete="off" ></textarea>
             </div>
         </div>
         <div class="row cl">
@@ -95,9 +95,7 @@
     $('#form').ajaxForm(function (data) {
         if (data == true) {
             parent.layer.msg("添加成功", { icon: 1, time: 3000 });
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.$('.btn-refresh').click();
-            parent.layer.close(index);
+            window.location.reload();
         }
         else if (data == false) {
             layer.msg('添加失败!', { icon: 1, time: 3000 });

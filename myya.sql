@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 23/04/2019 20:25:25
+ Date: 27/04/2019 13:54:06
 */
 
 SET NAMES utf8mb4;
@@ -135,8 +135,19 @@ CREATE TABLE `myya_doctor` (
   `book` varchar(255) DEFAULT NULL COMMENT '著作',
   `good_at_disease` varchar(255) DEFAULT NULL COMMENT '擅长疾病',
   `img` varchar(255) DEFAULT NULL COMMENT '图片',
+  `createTime` int(10) DEFAULT NULL,
+  `updateTime` int(10) DEFAULT NULL,
+  `deleteTime` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of myya_doctor
+-- ----------------------------
+BEGIN;
+INSERT INTO `myya_doctor` VALUES (7, 'demo', 'demo', 'linid', 'demo', 'demiljklasdasd', 'deminid', '20190427/0532b970c5ea21f85a5f31cd2739c074.jpg', 1556340393, 1556344079, NULL);
+INSERT INTO `myya_doctor` VALUES (8, 'das', 'asd', 'sdfsdf', 'asd', '', '', '', 1556341714, 1556344411, NULL);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for myya_site_info
@@ -183,7 +194,7 @@ CREATE TABLE `myya_user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `myya_ya`;
 CREATE TABLE `myya_ya` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `doctor_id` int(11) DEFAULT NULL,
   `patient_name` varchar(255) DEFAULT NULL,
@@ -210,7 +221,8 @@ CREATE TABLE `myya_ya` (
   `note` varchar(255) DEFAULT NULL,
   `imgs` varchar(255) DEFAULT NULL,
   `video` varchar(255) DEFAULT NULL,
-  `source` varchar(255) DEFAULT NULL
+  `source` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

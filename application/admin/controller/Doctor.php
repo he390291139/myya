@@ -165,4 +165,15 @@ class Doctor extends Base
         }
         return json('不允许操作');
     }
+
+    public function destroy($ids = null){
+        if($this->request->isPost()){
+            $res = $this->model->destroy(['id'=>$ids],true);
+            if($res)
+                return json(true);
+            else
+                return json(false);
+        }
+        return json('不允许操作');
+    }
 }

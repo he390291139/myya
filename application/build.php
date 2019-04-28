@@ -15,7 +15,7 @@ return [
 
     // 定义demo模块的自动生成 （按照实际定义的文件名生成）
     'admin'     => [
-        'view'       => ['doctor/index','doctor/add','doctor/edit','ya/index','ya/add','ya/edit'],
+        'view'       => ['user/index','user/add','user/edit'],
     ],
     // 其他更多的模块定义
 ];

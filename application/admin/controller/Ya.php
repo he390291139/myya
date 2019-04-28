@@ -7,7 +7,7 @@ use app\admin\model\Ya as yian;
 
 class Ya extends Base
 {
-    protected $pageNum = "10";
+    protected $pageNum = "20";
 
     public function _initialize()
     {
@@ -21,7 +21,10 @@ class Ya extends Base
      */
     public function index()
     {
-        $list = $this->model->paginate($this->pageNum);
+        $list = $this->model->with(['doctor'=>function($query){
+            $query->withField('name');
+            $query->field('name');
+        }])->paginate($this->pageNum);
         $page = $list->render();
         $count = $this->model->count('id');
         $this->assign('list', $list);
@@ -35,31 +38,9 @@ class Ya extends Base
      *
      * @return \think\Response
      */
-    public function create()
+    public function add()
     {
-        //
-    }
-
-    /**
-     * 保存新建的资源
-     *
-     * @param  \think\Request  $request
-     * @return \think\Response
-     */
-    public function save(Request $request)
-    {
-        //
-    }
-
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
+        return $this->view->fetch();
     }
 
     /**
@@ -73,17 +54,6 @@ class Ya extends Base
         //
     }
 
-    /**
-     * 保存更新的资源
-     *
-     * @param  \think\Request  $request
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * 删除指定资源
@@ -91,8 +61,15 @@ class Ya extends Base
      * @param  int  $id
      * @return \think\Response
      */
-    public function delete($id)
+    public function delete($ids =null)
     {
-        //
+        if($this->request->isPost()){
+            $res = $this->model->destroy($ids);
+            if($res)
+                return json(true);
+            else
+                return json(false);
+        }
+        return json(不允许操作);
     }
 }

@@ -1,7 +1,7 @@
 {extend name="public/base" /}
 
 {block name="seo"}
-<title>{$title|default='管理员列表'}</title>
+<title>{$title|default='用户列表'}</title>
 <meta name="keywords" content="{$keywords|default='页面关键字'}">
 <meta name="description" content="{$description|default='页面描述'}">
 <style>
@@ -21,18 +21,19 @@
 
 {block name="content"}
 
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span class="c-gray en">&gt;</span> 用户列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="cl pd-5 bg-1 bk-gray"> 
 		<span class="l">
 			<a href="javascript:;" onclick="window.location.reload()" class="btn btn-primary btn-refresh radius"><i class="Hui-iconfont">&#xe68f;</i> 刷新</a>
-			<a href="javascript:;" onclick="admin_add('添加管理员','{:url('admin/admin/add')}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+			<a href="{:url('admin/user/recycle')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe609;</i> 删除的会员</a>
+
 		</span> 
 		<span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
-				<th scope="col" colspan="9">管理员列表</th>
+				<th scope="col" colspan="9">用户列表</th>
 			</tr>
 			<tr class="text-c">
 				<th><input type="checkbox" name="" value=""></th>
@@ -46,7 +47,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{volist name='list' id='user'}
+			{volist name='user' id='user'}
 			<tr class="text-c">
 					<td><input type="checkbox" value="1" name=""></td>
 					<td>{$user.id}</td>
@@ -55,11 +56,11 @@
 					<td>{$user.email}</td>
 					<td>{$user.createTime}</td>
 					<td class="td-status">
-						{if condition="$user.status == 1 "} <a onClick="admin_start(this,{$user.id},{$user.status})" href="javascript:;" title="点击启用" style="text-decoration:none"><span class="label label-default radius">已停用</span></a>
-							{elseif condition="$user.status == 0"/}<a style="text-decoration:none" onClick="admin_stop(this,{$user.id},{$user.status})" href="javascript:;" title="点击禁用"><span class="label label-success radius">已启用</span></a>
+						{if condition="$user.status == 1 "} <a onClick="admin_start(this,{$user},{$user.status})" href="javascript:;" title="点击启用" style="text-decoration:none"><span class="label label-default radius">已停用</span></a>
+							{elseif condition="$user.status == 0"/}<a style="text-decoration:none" onClick="admin_stop(this,{$user},{$user.status})" href="javascript:;" title="点击禁用"><span class="label label-success radius">已启用</span></a>
 						{/if}</td>
 					<td class="td-manage">
-						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{:url('admin/admin/edit',['id'=>$user.id])}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
+						<a title="修改密码" href="javascript:;" onclick="admin_edit('重置密码','{:url('admin/user/edit',['id'=>$user])}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>修改密码</a> 
 						<a title="删除" href="javascript:;" onclick="admin_del(this,{$user.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
 				</tr>
 			{/volist}
@@ -86,17 +87,12 @@
 	w		弹出层宽度（缺省调默认值）
 	h		弹出层高度（缺省调默认值）
 */
-/*管理员-增加*/
-function admin_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-
-/*管理员-删除*/
+/*用户-删除*/
 function admin_del(obj,ids){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '/index.php/admin/admin/delete/ids/'+ids,
+			url: '/index.php/admin/user/delete/ids/'+ids,
 			dataType: 'json',
 			success: function(data){
 				if (data == true){
@@ -118,16 +114,16 @@ function admin_del(obj,ids){
 	});
 }
 
-/*管理员-编辑*/
+/*用户-编辑*/
 function admin_edit(title,url,w,h){
 	layer_show(title,url,w,h);
 }
-/*管理员-停用*/
+/*用户-停用*/
 function admin_stop(obj,id,status){
 	layer.confirm('确认要停用吗？',function(index){
 		$.ajax({
 			type    : 'POST',
-			url     : '/index.php/admin/admin/status/id/'+id+'/status/'+status,			
+			url     : '/index.php/admin/user/status/id/'+id+'/status/'+status,			
 			dataType: 'json',
 			success : function(data){
 				if(data == true){
@@ -149,12 +145,12 @@ function admin_stop(obj,id,status){
 	});
 }
 
-/*管理员-启用*/
+/*用户-启用*/
 function admin_start(obj,id,status){
 	layer.confirm('确认要启用吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url     : '/index.php/admin/admin/status/id/'+id+'/status/'+status,
+			url     : '/index.php/admin/user/status/id/'+id+'/status/'+status,
 			dataType: 'json',
 			success: function(data){
 				if(data == true){

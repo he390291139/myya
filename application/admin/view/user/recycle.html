@@ -21,32 +21,29 @@
 
 {block name="content"}
 
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 医生管理 <span class="c-gray en">&gt;</span> 删除的医生列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 会员管理 <span class="c-gray en">&gt;</span> 删除的会员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="cl pd-5 bg-1 bk-gray"> 
 		<span class="l">
 			<a href="javascript:;" onclick="window.location.reload()" class="btn btn-primary btn-refresh radius"><i class="Hui-iconfont">&#xe68f;</i> 刷新</a>
-			<!-- <a href="javascript:;" onclick="admin_add('添加医生','{:url('admin/doctor/add')}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加医生</a> -->
-			<a href="{:url('admin/doctor/index')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe681;</i> 医生列表</a>
+			<a href="{:url('admin/user/index')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe681;</i> 会员列表</a>
 		</span> 
 		<span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
-				<th scope="col" colspan="11">医生列表</th>
+				<th scope="col" colspan="9">用户列表</th>
 			</tr>
 			<tr class="text-c">
 				<th><input type="checkbox" name="" value=""></th>
-				<th> ID </th>
-				<th> 姓 名 </th>
-				<th>个人经历</th>
-				<th>学术成就</th>
-				<th>荣誉称号</th>
-				<th> 著 作 </th>
-				<th>擅长疾病</th>
-				<th> 图 片 </th>
+				<th>ID</th>
+				<th>昵称</th>
+				<th>登录名</th>
+				<th>邮箱</th>
+				<th>加入时间</th>
+				<th>是否已启用</th>
 				<th>删除时间</th>
-				<th> 操 作 </th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,13 +51,14 @@
 			<tr class="text-c">
 					<td><input type="checkbox" value="1" name=""></td>
 					<td>{$user.id}</td>
-					<td>{$user.name}</td>
-					<td>{$user.experience}</td>
-					<td>{$user.scholastic}</td>
-					<td>{$user.honorary}</td>
-					<td>{$user.book}</td>
-					<td>{$user.good_at_disease}</td>
-					<td><img width="80" height="80" src="__UPLOADS__/{$user.img}" alt=""></td>
+					<td>{$user.nickname}</td>
+					<td>{$user.username}</td>
+					<td>{$user.email}</td>
+					<td>{$user.createTime}</td>
+					<td class="td-status">
+						{if condition="$user.status == 1 "} <a onClick="admin_start(this,{$user.id},{$user.status})" href="javascript:;" title="点击启用" style="text-decoration:none"><span class="label label-default radius">已停用</span></a>
+							{elseif condition="$user.status == 0"/}<a style="text-decoration:none" onClick="admin_stop(this,{$user.id},{$user.status})" href="javascript:;" title="点击禁用"><span class="label label-success radius">已启用</span></a>
+						{/if}</td>
 					<td>{$user.deleteTime|date="Y-m-d H:i:s",###}</td>
 					<td class="td-manage">
 						<a title="恢复" href="javascript:;" onclick="admin_del(this,{$user.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe66b;</i>恢复</a>
@@ -84,12 +82,12 @@
 <script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript">
 
-/*医生-恢复*/
+/*会员-恢复*/
 function admin_del(obj,ids){
 	layer.confirm('确认要恢复吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '/index.php/admin/doctor/restore/ids/'+ids,
+			url: '/index.php/admin/user/restore/ids/'+ids,
 			dataType: 'json',
 			success: function(data){
 				if (data == true){
@@ -115,7 +113,7 @@ function admin_destroy(obj,ids){
 	layer.confirm('确认彻底删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '/index.php/admin/doctor/destroy/ids/'+ids,
+			url: '/index.php/admin/user/destroy/ids/'+ids,
 			dataType: 'json',
 			success: function(data){
 				if (data == true){

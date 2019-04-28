@@ -1,7 +1,9 @@
 <?php
 namespace app\index\controller;
-
-class Base
+use think\Controller;
+use think\Request;
+use think\auth\Auth;
+class Base extends Controller
 {
 
 }

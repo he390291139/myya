@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use think\Cache;
-use app\admin\model\siteInfo;
+use app\admin\model\SiteInfo;
 
 class System extends Base
 {
@@ -12,7 +12,7 @@ class System extends Base
     public function _initialize()
     {
         parent::_initialize();
-        $this->model =new siteInfo();
+        $this->model =new SiteInfo();
     }
     /**
      * 显示资源列表

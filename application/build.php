@@ -14,8 +14,8 @@ return [
     '__file__' => ['common.php', 'config.php', 'database.php'],
 
     // 定义demo模块的自动生成 （按照实际定义的文件名生成）
-    'admin'     => [
-        'view'       => ['user/index','user/add','user/edit'],
+    'index'     => [
+        'view'       => ['index/search'],
     ],
     // 其他更多的模块定义
 ];

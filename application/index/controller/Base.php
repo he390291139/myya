@@ -12,10 +12,7 @@ use think\Controller;
 
 // >>>>>>> 85b82e344cc9239d079c3a987739fd0c49661dba
 class Base extends Controller
-{
-    protected $model;
-    
-    protected $auth;
+{    
 
     public function _initialize(){
 

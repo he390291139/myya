@@ -1,0 +1,51 @@
+<link href="__STATIC__/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+<div class="container" style="padding-bottom:-20px;">
+    <form id="form" class="form form-horizontal" action="{:url('index/User/resetPwd')}" method="post">
+        <input type="hidden" name="id" value="{$id}">
+        <div class="row cl">
+                <label class="form-label col-xs-3"><span class="c-red">*</span>原密码</label>
+                <div class="formControls col-xs-8">
+                    <input  name="password1" type="password" placeholder="原密码" class="input-text size-L">
+                </div>
+            </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3"><span class="c-red">*</span>新密码</label>
+            <div class="formControls col-xs-8">
+                <input  name="password" type="password" placeholder="新密码" class="input-text size-L">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3"><span class="c-red">*</span>请再次输入新密码</label>
+            <div class="formControls col-xs-8">
+                <input  name="password2" type="password" placeholder="请再次输入新密码" class="input-text size-L">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-3">
+                <input id="login" name="" type="submit" class="btn btn-success radius size-L"
+                    value="&nbsp;提&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="__STATIC__/index/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery/1.9.1/jquery.form.min.js"></script>
+<script type="text/javascript">
+    $('#form').ajaxForm(function (data) {
+        if (data == true) {
+            parent.layer.msg("修改成功！", { icon: 1, time: 10000 });
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }
+        else if (data == false) {
+            layer.msg('修改失败!', { icon: 1, time: 4000 });
+        } else {
+            layer.msg(data, { icon: 1, time: 4000 });
+        }
+    });
+</script>

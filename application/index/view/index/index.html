@@ -4,98 +4,116 @@
 <meta charset="utf-8" />
 <meta name="description" content="websites description" />
 <meta name="keywords" content="websited keywords" />
-
+<link rel="stylesheet" href="__STATIC__/index/css/liMarquee.css">
 
 {/block}
 {block name="body"}
-<div>
-    <!-- header begain-->
-    {include file="common:header"}
-    <!-- / header end-->
 
-    <div id="content" class="main-content">
-        <div class="frontpage-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2 text-center">
-                        <div style="padding-top:30px;">
+<!-- header begain-->
+{include file="common:header"}
+<!-- / header end-->
 
-                            <h1 class="text-white m-t-lg m-b-lg h2 l-h-1x animated fadeInDown">
-                                欢迎使用{:getSiteInfo('site_name')}系统
-                            </h1>
-                            <form id="" role="search" action="{:url('index/Index/search')}" method="GET">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input id="key" name="key" type="text"
-                                            class="form-control no-border input-lg white-transparant-bg no-border padder w-sm"
-                                            placeholder="">
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-lg"
-                                                style="background-color:#896741;"><i class="fa fa-search"></i></button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<div class="col-sm-8 col-sm-offset-2" style="padding-top:30px;">
+    <div class="col-sm-4 clear-padding">
+        <div class="tit01 title-border">
+            <span>系统简介</span>
+        </div>
+        
+        <div class="div-border bg-white" style="text-indent:2em;line-height:2em;height: 248px; overflow: hidden; padding-top: 1.2em;">
+                {php}$a=getSiteInfo('system_info');{/php}{$a|mb_substr=0,157,'utf8'}...
+        </div>
+    </div>
+    <div class="col-sm-8 text-center">
+        <!-- 
+                                <h1 class="text-white m-t-lg m-b-lg h2 l-h-1x animated fadeInDown">
+                                    欢迎使用{:getSiteInfo('site_name')}
+                                </h1> -->
+        <form id="" role="search" action="{:url('index/Index/search')}" method="GET">
+            <div class="form-group" style="margin-bottom:unset;">
+                <div class="input-group">
+                    <input id="key" name="key" type="text" class="form-control no-border input-lg no-border padder w-sm"
+                        placeholder="">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-lg" style="background-color:#896741; color:white;"><i
+                                class="fa fa-search"></i></button>
+                    </span>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2" style="color:#291804;">
-                        <ul class="nav-tabs nav nav-justified" id="tabs1">
-                            <li class="active"><a href="#tabs-1">老中医</a></li>
-                            <li><a href="#tabs-2">中医病名 </a></li>
-                            <li><a href="#tabs-3">西医病名 </a></li>
-                            <li><a href="#tabs-4">治则治法 </a></li>
-                            <li><a href="#tabs-5">方剂名 </a></li>
-                            <li><a href="#tabs-6">用药 </a></li>
-                        </ul>
-                        <div class="tab-content" style="height:130px;padding-top: 0.6em; border: 1px solid #c59b6c; overflow: hidden;">
-                            <div class="tab-pane active" id="tabs-1">
-                                    {volist name='tabs1' id='tabs1'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs1.name}</a></li>                
-                                    {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-2">
-
-                                    {volist name='tabs2' id='tabs2'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs2.tcm_diagnosis}</a></li>                
-                                    {/volist}
-
-                            </div>
-                            <div class="tab-pane" id="tabs-3">
-                                {volist name='tabs3' id='tabs3' offset="15"}
-                                <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs3.wes_diagnosis}</a></li>                
-                                {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-4">
-                                    {volist name='tabs4' id='tabs4'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs4.therapeutic_principle_and_method}</a></li>                
-                                    {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-5">
-                                    {volist name='tabs5' id='tabs5'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs5.prescription}</a></li>                
-                                    {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-6">
-                                    {volist name='tabs6' id='tabs6'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs6.value}</a></li>                
-                                    {/volist}
-                            </div>
-                        </div>
-                    </div>
-                    <div style="height: 2em;"></div>
+            </div>
+        </form>
+        <div class="" style="color:#291804; background-color: white;">
+            <ul class="nav-tabs nav nav-justified" id="tabs1">
+                <li class="active"><a href="#tabs-1">老中医</a></li>
+                <li><a href="#tabs-2">中医病名 </a></li>
+                <li><a href="#tabs-3">西医病名 </a></li>
+                <li><a href="#tabs-4">治则治法 </a></li>
+                <li><a href="#tabs-5">方剂名 </a></li>
+                <li><a href="#tabs-6">用药 </a></li>
+            </ul>
+            <div class="tab-content"
+                style="height:195px;padding-top: 0.6em; border: 1px solid #c59b6c; overflow: hidden;">
+                <div class="tab-pane active" id="tabs-1">
+                    {volist name='tabs1' id='tabs1'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs1.name])}">{$tabs1.name}</a></li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-2">
+                    {volist name='tabs2' id='tabs2'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs2.tcm_diagnosis])}">{$tabs2.tcm_diagnosis}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-3">
+                    {volist name='tabs3' id='tabs3' offset="15"}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs3.wes_diagnosis])}">{$tabs3.wes_diagnosis}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-4">
+                    {volist name='tabs4' id='tabs4'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs4.therapeutic_principle_and_method])}">{$tabs4.therapeutic_principle_and_method}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-5">
+                    {volist name='tabs5' id='tabs5'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs5.prescription])}">{$tabs5.prescription}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-6">
+                    {volist name='tabs6' id='tabs6'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs6.value])}">{$tabs6.value}</a>
+                    </li>
+                    {/volist}
                 </div>
             </div>
         </div>
+        <div style="height: 2em;"></div>
 
-        <div class="container">
-            <div class="m-t-md"></div>
-
-            <div style="height: 75px;"></div>
-        </div>
     </div>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="tit01 title-border">
+        <span>名医照片</span>
+    </div>
+    <div class="dowebok" style="background: none;">
+        {volist name='imgs' id='imgs'}
+        <a href="{:url('index/index/doctorDetail',['id'=>$imgs.id])}"><img width="160px" height="210px"
+                src="__UPLOADS__/{$imgs.img}" alt=""></a>
+        {/volist}
+    </div>
+    <div style="height: 20px;"></div>
 </div>
 
 {include file="common:footer"}
@@ -103,40 +121,12 @@
 <script type="text/javascript" src="__STATIC__/index/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script type="text/javascript" src="__STATIC__/index/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery.liMarquee.js"></script>
 <script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
 <script>
     $(function () {
-        $("#tabs1 a").mousemove(function (e) {
-            $(this).tab('show');
-        });
-        $("#tabs2 a").mousemove(function (e) {
-            $(this).tab('show');
-        });
-        $("#tabs3 a").mousemove(function (e) {
-            $(this).tab('show');
-        });
-        $("#tabs4 a").mousemove(function (e) {
-            $(this).tab('show');
-        });
-        $("#tabs5 a").mousemove(function (e) {
-            $(this).tab('show');
-        });
-        $("#tabs6 a").mousemove(function (e) {
-            $(this).tab('show');
-        });
+        // 图片轮播
+        $('.dowebok').liMarquee();
     });
-    function borrow(book_id) {
-        layer.open({
-            type: 2,
-            title: '借书确认',
-            shadeClose: true,
-            shade: false,
-            area: ['500px', '330px'],
-            content: "borrow/book_id/" + book_id,
-            end: function () {
-                location.reload();
-            }
-        });
-    }
 </script>
 {/block}

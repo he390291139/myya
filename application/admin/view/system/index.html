@@ -34,17 +34,17 @@
 	<span class="c-gray en">&gt;</span>
 	系统管理
 	<span class="c-gray en">&gt;</span>
-	基本设置
+	{$pathName}
 	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:window.location.reload();" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
 		<div id="tab-system" class="HuiTab">
 			<div class="tabBar cl">
-				<span>基本设置</span>
-                <span>其他设置</span>
+				<span>{$pathName}</span>
+                <!-- <span>其他设置</span> -->
                 <ul class="cl">	 
                         <li class="r">共有数据：<strong>{$count}</strong> 条</li>
-                        <li><a class="r" href="javascript:;" onclick="system_add('添加配置','{:url('admin/system/add')}','','310')"><i class="Hui-iconfont">&#xe600;</i> 添加配置</a></li>
+                        <li><a class="r" href="javascript:;" onclick="system_add('添加配置','{:url('admin/system/add')}','','400')"><i class="Hui-iconfont">&#xe600;</i> 添加配置</a></li>
                         <li><a class="r btn-refresh" href="javascript:;" onclick="window.location.reload()" ><i class="Hui-iconfont">&#xe68f;</i> 刷新</a></li>
                 </ul>
 			</div>
@@ -52,15 +52,15 @@
                 <table class="table table-border table-bordered table-bg">
                         <thead>
                             <tr>
-                                <th scope="col" colspan="7">权限管理</th>
+                                <th scope="col" colspan="7">本页面添加设置时类型填写&nbsp;&nbsp;-->&nbsp;&nbsp;{$type}</th>
                             </tr>
                             <tr class="text-c">
-                                <th><input type="checkbox" name="" value=""></th>
-                                <th>ID</th>
-                                <th>关键字</th>
+                                <th width="20"><input type="checkbox" name="" value=""></th>
+                                <th width="20">ID</th>
+                                <th width="120">关键字</th>
                                 <th>值</th>
-                                <th>描述</th>
-                                <th>操作</th>
+                                <th width="160">描述</th>
+                                <th width="120">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,8 +72,8 @@
                                     <td>{$list.value}</td>
                                     <td>{$list.description}</td>
                                     <td>
-                                        <a title="编辑" href="javascript:;" onclick="system_edit('编辑','{:url('admin/system/edit',['id'=>$list.id])}','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
-                                        <a title="删除" href="javascript:;" onclick="system_del(this,{$list.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+                                        <a title="编辑" href="javascript:;" onclick="system_edit('编辑','{:url('admin/system/edit',['id'=>$list.id])}','','400')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
+                                        <a {if condition ="$pathName =='基本设置'" }style="display:none;"{/if} title="删除" href="javascript:;" onclick="system_del(this,{$list.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
                                     </td>
                                 </tr>
                             {/volist}
@@ -81,38 +81,7 @@
                     </table>
 
 			</div>
-			<div class="tabCon">
-                <table class="table table-border table-bordered table-bg">
-                        <thead>
-                            <tr>
-                                <th scope="col" colspan="7">权限管理</th>
-                            </tr>
-                            <tr class="text-c">
-                                <th><input type="checkbox" name="" value=""></th>
-                                <th>ID</th>
-                                <th>关键字</th>
-                                <th>值</th>
-                                <th>描述</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {volist name='list1' id='list1'}
-                            <tr class="text-c">
-                                    <td><input type="checkbox" value="1" name=""></td>
-                                    <td>{$list1.id}</td>
-                                    <td>{$list1.key}</td>
-                                    <td>{$list1.value}</td>
-                                    <td>{$list1.description}</td>
-                                    <td>
-                                        <a title="编辑" href="javascript:;" onclick="system_edit('编辑','{:url('admin/system/edit',['id'=>$list.id])}','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
-                                        <a title="删除" href="javascript:;" onclick="system_del(this,{$list1.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
-                                    </td>
-                                </tr>
-                            {/volist}
-                        </tbody>
-                    </table>
-			</div>
+	
 		</div>
 </div>
 

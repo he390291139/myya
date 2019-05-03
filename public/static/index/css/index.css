@@ -1,0 +1,91 @@
+html,
+body {
+  background: url(../images/bk01.png);
+  padding-top: 25px;
+}
+
+nav
+{
+    color: black;
+}
+
+nav .navbar-header{
+    background-color: #62350c;
+}
+
+nav .navbar-header:hover{
+    background-color: #954e0e;
+}
+
+nav .navbar-brand
+{
+    color: white;
+
+}
+
+.nav a
+{
+    color: black;
+}
+
+.nav.navbar-nav li a:hover
+{
+    color: white;
+    background-color: #954e0e;
+}
+
+.split{
+    background: url(../images/bk02.png) repeat-x left top;
+}
+
+.tit01 span
+{ 
+    width:auto;
+    height:26px; 
+    display:inline-block; 
+    background:#CFB889 url(../images/titbk.png) no-repeat left top; 
+    padding-left:70px; padding-right:100px; 
+    font:normal 18px/26px "微软雅黑"; 
+    color:#010101; 
+}
+
+.div-border
+{
+    border: #c59b6c 1px solid;
+}
+
+.div-bg-white
+{
+    background-color: white;
+    border: #c59b6c 1px solid;
+}
+
+.bg-white
+{
+    margin-top: 5px;
+    padding: 5px 10px;;
+    background-color: white;
+}
+
+.title-border
+{
+    padding-bottom: 3px;
+    border-bottom: #954e0e 1px solid;
+}
+.clear-padding
+{
+    padding: 0px;
+}
+
+
+.dowebok 
+{
+    margin-top: 5px;
+    font-size: 0;
+}
+
+.dowebok img 
+{
+    margin-left: 10px;
+    vertical-align: top;
+}

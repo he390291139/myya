@@ -15,7 +15,10 @@ return [
 
     // 定义demo模块的自动生成 （按照实际定义的文件名生成）
     'index'     => [
-        'controller'       => ['YaApi'],
+        'view'       => ['user/myCollect','user/resetPwd'],
     ],
+    // 'admin'     => [
+    //     'view'       => ['system/key_word_set',],
+    // ],
     // 其他更多的模块定义
 ];

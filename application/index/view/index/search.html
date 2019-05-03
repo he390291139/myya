@@ -8,120 +8,114 @@
 
 {/block}
 {block name="body"}
-<div>
-    <!-- header begain-->
-    {include file="common:header"}
-    <!-- / header end-->
+<!-- header begain-->
+{include file="common:header"}
+<!-- / header end-->
 
-    <div id="content" class="main-content">
-        <div class="frontpage-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2 text-center">
-                        <div style="padding-top:30px;">
+<div class="col-sm-8 col-sm-offset-2" style="padding-top:30px;">
 
-                            <h1 class="text-white m-t-lg m-b-lg h2 l-h-1x animated fadeInDown">
-                                欢迎使用{:getSiteInfo('site_name')}系统
-                            </h1>
-                            <form id="" role="search" action="{:url('index/Index/search')}">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input id="key" name="key" type="text"
-                                            class="form-control no-border input-lg white-transparant-bg no-border padder w-sm"
-                                            placeholder="">
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-lg"
-                                                style="background-color:#896741;"><i class="fa fa-search"></i></button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <div class="text-center">
+        <form id="" role="search" action="{:url('index/Index/search')}" method="GET">
+            <div class="form-group" style="margin-bottom:unset;">
+                <div class="input-group">
+                    <input id="key" name="key" type="text" class="form-control no-border input-lg no-border padder w-sm"
+                        placeholder="">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-lg" style="background-color:#896741; color:white;"><i
+                                class="fa fa-search"></i></button>
+                    </span>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2" style="color:#291804;">
-                        <ul class="nav-tabs nav nav-justified" id="tabs1">
-                            <li class="active"><a href="#tabs-1">老中医</a></li>
-                            <li><a href="#tabs-2">中医病名 </a></li>
-                            <li><a href="#tabs-3">西医病名 </a></li>
-                            <li><a href="#tabs-4">治则治法 </a></li>
-                            <li><a href="#tabs-5">方剂名 </a></li>
-                            <li><a href="#tabs-6">用药 </a></li>
-                        </ul>
-                        <div class="tab-content" style="height:130px;padding-top: 0.6em; border: 1px solid #c59b6c; overflow: hidden;">
-                            <div class="tab-pane active" id="tabs-1">
-                                    {volist name='tabs1' id='tabs1'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs1.name}</a></li>                
-                                    {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-2">
-
-                                    {volist name='tabs2' id='tabs2'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs2.tcm_diagnosis}</a></li>                
-                                    {/volist}
-
-                            </div>
-                            <div class="tab-pane" id="tabs-3">
-                                {volist name='tabs3' id='tabs3' offset="15"}
-                                <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs3.wes_diagnosis}</a></li>                
-                                {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-4">
-                                    {volist name='tabs4' id='tabs4'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs4.therapeutic_principle_and_method}</a></li>                
-                                    {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-5">
-                                    {volist name='tabs5' id='tabs5'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs5.prescription}</a></li>                
-                                    {/volist}
-                            </div>
-                            <div class="tab-pane" id="tabs-6">
-                                    {volist name='tabs6' id='tabs6'}
-                                    <li style="display: inline-block; padding:0.6em;"><a href="">{$tabs6.value}</a></li>                
-                                    {/volist}
-                            </div>
-                        </div>
-                    </div>
-                    <div style="height: 2em;"></div>
+            </div>
+        </form>
+        <div class="" style="color:#291804; background-color: white;">
+            <ul class="nav-tabs nav nav-justified" id="tabs1">
+                <li class="active"><a href="#tabs-1">老中医</a></li>
+                <li><a href="#tabs-2">中医病名 </a></li>
+                <li><a href="#tabs-3">西医病名 </a></li>
+                <li><a href="#tabs-4">治则治法 </a></li>
+                <li><a href="#tabs-5">方剂名 </a></li>
+                <li><a href="#tabs-6">用药 </a></li>
+            </ul>
+            <div class="tab-content"
+                style="height:195px;padding-top: 0.6em; border: 1px solid #c59b6c; overflow: hidden;">
+                <div class="tab-pane active" id="tabs-1">
+                    {volist name='tabs1' id='tabs1'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs1.name])}">{$tabs1.name}</a></li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-2">
+                    {volist name='tabs2' id='tabs2'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs2.tcm_diagnosis])}">{$tabs2.tcm_diagnosis}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-3">
+                    {volist name='tabs3' id='tabs3' offset="15"}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs3.wes_diagnosis])}">{$tabs3.wes_diagnosis}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-4">
+                    {volist name='tabs4' id='tabs4'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs4.therapeutic_principle_and_method])}">{$tabs4.therapeutic_principle_and_method}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-5">
+                    {volist name='tabs5' id='tabs5'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs5.prescription])}">{$tabs5.prescription}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-6">
+                    {volist name='tabs6' id='tabs6'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs6.value])}">{$tabs6.value}</a>
+                    </li>
+                    {/volist}
                 </div>
             </div>
         </div>
+        <div style="height: 2em;"></div>
 
-        <div class="container">
-            <div class="m-t-md"></div>
-            <table id="dt_basic" class="table table-bordered" style="background-color:#afd4e0; color:black;" width="100%">
-                    <thead>
-                        <tr>
-                            <th>医案标题</th>
-                            <th>主诉症状</th>
-                            <th>中医诊断</th>
-                            <th>西医诊断</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {volist name='list' id='list' key="k"}
-                        <tr style="background-color:#e5f1f5;">
-                            <td style="color:red;">{$list.title}</td>
-                            <td>{$list.symptom}</td>
-                            <td>{$list.tcm_diagnosis}</td>
-                            <td>{$list.wes_diagnosis}</td>
-                        </tr>
-                        <tr style="background-color:#f8fbfc;">
-                            <td colspan="4">
-                                {$list.therapeutic_principle_and_method}
-                                {$list.prescription}
-                                {$list.prescription_composition}
-                            </td>
-                        </tr>
-                        {/volist}
-                    </tbody>
-                </table>
-            <div style="height: 75px;"></div>
-        </div>
     </div>
+</div>
+<div class="col-sm-8 col-sm-offset-2">
+    <table id="dt_basic" class="table table-bordered" style="background-color:#afd4e0; color:black;" width="100%">
+        <thead>
+            <tr>
+                <th>医案标题</th>
+                <th>主诉症状</th>
+                <th>中医诊断</th>
+                <th>西医诊断</th>
+                <th> 操 作 </th>
+            </tr>
+        </thead>
+        <tbody>
+            {volist name='list' id='list' key="k"}
+            <tr style="background-color:#e5f1f5;">
+                <td style="color:red;">{$list.title}</td>
+                <td>{$list.symptom}</td>
+                <td>{$list.tcm_diagnosis}</td>
+                <td>{$list.wes_diagnosis}</td>
+                <td text-algin="center"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></td>
+            </tr>
+            <tr style="background-color:#f8fbfc;">
+                <td colspan="4">
+                    {$list.therapeutic_principle_and_method}
+                    {$list.prescription}
+                    {$list.prescription_composition}
+                </td>
+                <td></td>
+            </tr>
+            {/volist}
+        </tbody>
+    </table>
 </div>
 
 {include file="common:footer"}

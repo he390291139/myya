@@ -4,8 +4,84 @@
         <!-- 加载meta信息 -->
         {include file="common:meta"}
         {block name="meta"}{/block}
+        <style>
+            .layui-layer-msg{
+                color:black;
+            }
+        </style>
     </head>
     <body>
     {block name="body"}{/block}
     </body>
+
+    <script>
+    $(function () {
+        $("#tabs1 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs2 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs3 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs4 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs5 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs6 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+    });
+    function register(title,url,w,h) 
+    {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: false,
+            area: [w,h],
+            content: url,
+            end: function () {
+                setTimeout(function(){
+                    window.location.reload();
+                },500);
+            }
+        });
+    }
+    function login(title,url,w,h) 
+    {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: false,
+            area: [w,h],
+            content: url,
+            end: function () {
+                setTimeout(function(){
+                    window.location.reload();
+                },500);
+            }
+        });
+    }
+    function resetPwd(title,url,w,h) 
+    {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: false,
+            area: [w,h],
+            content: url,
+            end: function () {
+                setTimeout(function(){
+                    window.location.reload();
+                },500);
+            }
+        });
+    }
+    </script>
 </html>

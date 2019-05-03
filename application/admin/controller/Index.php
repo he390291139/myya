@@ -13,7 +13,8 @@ class Index extends Base
         return $this->view->fetch();
     }
 
-    public function welcome(){
+    public function welcome()
+    {
         cache('site_title');
 
         return $this->view->fetch();
@@ -24,8 +25,8 @@ class Index extends Base
      *
      * @return void
      */
-    public function login(){
-
+    public function login()
+    {
         $path = $this->request->path();
 
         if($this->request->isPost()){
@@ -64,9 +65,10 @@ class Index extends Base
         return $this->view->fetch();
     }
 
-    public function logout(){
-
+    public function logout()
+    {
         session('admin',null);
+        session('admin_id',null);
         return $this->success('退出成功',url('admin/index/login'),'','3');
     }
 }

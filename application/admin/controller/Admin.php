@@ -72,6 +72,11 @@ class Admin extends Base
 
     public function edit($id)
     {
+        $user = $this->model->get($id);
+        $this->assign('user',$user);
+        return $this->view->fetch();
+
+        
         if($this->request->isPost()){
             $param = $this->request->param();
             
@@ -90,9 +95,7 @@ class Admin extends Base
                 return json(false);
             }
         }
-        $user = $this->model->get($id);
-        $this->assign('user',$user);
-        return $this->view->fetch();
+        
     }
 
     /**

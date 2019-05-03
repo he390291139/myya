@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use app\admin\controller\Base;
 use think\Validate;
 use app\admin\model\Admin;
+use think\Session;
 
 class Index extends Base
 {
@@ -35,9 +36,9 @@ class Index extends Base
             $password = $param['password'];
 
             $validate = new Validate([
-                'name'     => 'require|max:25',
-                'password' => 'require|min:6',
-                'captcha'   => 'require|captcha',
+                'name|登录名'     => 'require|max:25',
+                'password|密码' => 'require|min:6',
+                'captcha|密码'   => 'require|captcha',
             ]);
             $data = [
                 'name'   => $username,
@@ -58,6 +59,7 @@ class Index extends Base
             {
                 session('admin',$username);
                 session('admin_id',$admin['id']);
+                // Session::set(name:'user_info', $admin->getData());
                 return $this->success("欢迎您！$username",url('admin/index/index'),'','3');
             }
             return $this->error('密码填写错误','','',3);

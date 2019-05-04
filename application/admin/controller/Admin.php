@@ -21,7 +21,7 @@ class Admin extends Base
      */
     public function index()
     {
-        $list = $this->model->field('id,username,email,nickname,status,createTime')->paginate($this->pageNum);
+        $list = $this->model->field('id,username,email,nickname,status')->paginate($this->pageNum);
         $page = $list->render();
         $count = $this->model->count('id');
         $this->assign('list', $list);
@@ -40,12 +40,12 @@ class Admin extends Base
                 'nickname' => 'require|min:4|max:16' ,
                 'username' => 'require|min:4|max:16',
                 'email'    => 'require|email',
-                'password' => 'require|min:6',
-                'status'   => 'require',
+                'password' => 'require|min:6|alphaNum',
+                'status'   => 'require|number',
             ]);
 
             if (!$validate->check($param)) {
-                return json($validate->getError());
+                return json("$validate->getError()");
             }
         
             $res = $this->model->get(['username' => $param['username']]);
@@ -133,5 +133,27 @@ class Admin extends Base
                 return json(false);
         }
         return $this->error('error');
+    }
+
+    public function resetPwd($id = null)
+    {
+        if ($this->request->isPost()) {
+            $param = $this->request->param();
+            $validate = new Validate([
+                'password'  => 'require|min:6|alphaNum',
+            ]);
+            if (!$validate->check($param)) {
+                return json($validate->getError());
+            }
+            $user = $this->model->get($param['id']);
+            $param['password'] = getPassword($param['password'], $user['salt']);
+            $res = $this->model->allowField('password')->save($param, ['id' => $param['id']]);
+            if ($res)
+                return json(true);
+            else
+                return json($res->getError());
+        }
+        $this->assign('id', $id);
+        return $this->view->fetch();
     }
 }

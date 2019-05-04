@@ -1,0 +1,222 @@
+{extend name="common:base" /}
+{block name="meta"}
+<title>{:getSiteInfo('site_name')}</title>
+<meta charset="utf-8" />
+<meta name="description" content="websites description" />
+<meta name="keywords" content="websited keywords" />
+
+
+{/block}
+{block name="body"}
+<!-- header begain-->
+{include file="common:header"}
+<!-- / header end-->
+
+<div class="col-sm-8 col-sm-offset-2" style="padding-top:30px;">
+
+    <div class="text-center">
+        <form id="" role="search" action="{:url('index/User/myCollect')}" method="GET">
+            <div class="form-group" style="margin-bottom:unset;">
+                <div class="input-group">
+                    <input id="key" name="key" type="text" class="form-control input-lg"
+                        placeholder="">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-lg" style="background-color:#896741; color:white;"><i
+                                class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </form>
+        <div class="" style="color:#291804; background-color: white;">
+            <ul class="nav-tabs nav nav-justified" id="tabs1">
+                <li class="active"><a href="#tabs-1">老中医</a></li>
+                <li><a href="#tabs-2">中医病名 </a></li>
+                <li><a href="#tabs-3">西医病名 </a></li>
+                <li><a href="#tabs-4">治则治法 </a></li>
+                <li><a href="#tabs-5">方剂名 </a></li>
+                <li><a href="#tabs-6">用药 </a></li>
+            </ul>
+            <div class="tab-content"
+                style="height:195px;padding-top: 0.6em; border: 1px solid #c59b6c; overflow: hidden;">
+                <div class="tab-pane active" id="tabs-1">
+                    {volist name='tabs1' id='tabs1'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs1.name])}">{$tabs1.name}</a></li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-2">
+                    {volist name='tabs2' id='tabs2'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs2.tcm_diagnosis])}">{$tabs2.tcm_diagnosis}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-3">
+                    {volist name='tabs3' id='tabs3' offset="15"}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs3.wes_diagnosis])}">{$tabs3.wes_diagnosis}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-4">
+                    {volist name='tabs4' id='tabs4'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs4.therapeutic_principle_and_method])}">{$tabs4.therapeutic_principle_and_method}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-5">
+                    {volist name='tabs5' id='tabs5'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs5.prescription])}">{$tabs5.prescription}</a>
+                    </li>
+                    {/volist}
+                </div>
+                <div class="tab-pane" id="tabs-6">
+                    {volist name='tabs6' id='tabs6'}
+                    <li style="display: inline-block; padding:0.6em;"><a
+                            href="{:url('index/Index/search',['key'=>$tabs6.value])}">{$tabs6.value}</a>
+                    </li>
+                    {/volist}
+                </div>
+            </div>
+        </div>
+        <div style="height: 2em;"></div>
+
+    </div>
+</div>
+<div class="col-sm-8 col-sm-offset-2">
+    <table id="dt_basic" class="table table-bordered" style="background-color:#afd4e0; color:black;" width="100%">
+        <thead>
+            <tr>
+                <th>医案标题</th>
+                <th>主诉症状</th>
+                <th>中医诊断</th>
+                <th>西医诊断</th>
+                <th> 操 作 </th>
+            </tr>
+        </thead>
+        <tbody>
+            {volist name='list' id='list' key="k"}
+            <tr style="background-color:#e5f1f5;">
+                <td style="color:red;">{$list.title}</td>
+                <td>{$list.symptom}</td>
+                <td>{$list.tcm_diagnosis}</td>
+                <td>{$list.wes_diagnosis}</td>
+                <td class="text-center">
+                        {if condition='in_array($list.id,$collect)'}<a href="javascript:;" onclick="uncollect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star" aria-hidden="true"></i></a>
+                        {else /}<a href="javascript:;" onclick="collect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></a>
+                        {/if}
+                </td>
+            </tr>
+            <tr style="background-color:#f8fbfc;">
+                <td colspan="4">
+                    {$list.therapeutic_principle_and_method}
+                    {$list.prescription}
+                    {$list.prescription_composition}
+                </td>
+                <td></td>
+            </tr>
+            {/volist}
+        </tbody>
+    </table>
+</div>
+
+{include file="common:footer"}
+
+<script type="text/javascript" src="__STATIC__/index/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="__STATIC__/index/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script>
+    $(function () {
+        $("#tabs1 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs2 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs3 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs4 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs5 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        $("#tabs6 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+    });
+    function collect(obj,ya_id,uid) {
+        layer.confirm('请确认收藏？', {
+            btn: ['确定','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            $.ajax({
+                url:"/index.php/index/user/collect/ya_id/"+ya_id+"/uid/"+uid,
+                type:"post",
+                success:function (data) {
+                    if (data==true){
+                        parent.layer.msg("收藏成功",{
+                            time:1000,
+                        });
+                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="uncollect(this,'+ya_id+','+uid+')"><i class="fa fa-star" aria-hidden="true"></i></a>');
+                    }else {
+                        parent.layer.msg(data,{
+                            time:1000,
+                        });
+
+                    }
+                },
+                error:function(){
+                    parent.layer.msg("收藏失败",{
+                        time:1000,
+                    });
+
+                }
+            });
+        }, function(){
+            parent.layer.msg('取消操作',{
+                time:500,
+            })
+        });
+    }
+
+    function uncollect(obj,ya_id,uid) {
+        layer.confirm('请确认取消收藏？', {
+            btn: ['确定','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            $.ajax({
+                url:"/index.php/index/user/uncollect/ya_id/"+ya_id+"/uid/"+uid,
+                type:"post",
+                success:function (data) {
+                    if (data==true){
+                        parent.layer.msg("取消收藏成功",{
+                            time:1000,
+                        });
+                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="collect(this,'+ya_id+','+uid+')"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></a>');
+                    }else {
+                        parent.layer.msg(data,{
+                            time:1000,
+                        });
+
+                    }
+                },
+                error:function(){
+                    parent.layer.msg("取消收藏失败",{
+                        time:1000,
+                    });
+
+                }
+            });
+        }, function(){
+            layer.msg('取消操作',{
+                time:500,
+            })
+        });
+    }
+</script>
+{/block}

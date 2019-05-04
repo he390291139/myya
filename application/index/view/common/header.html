@@ -15,7 +15,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {if session('?user')}
                 <li><a rel="nofollow" href="#"><span>欢迎您 ： {:session('user_nickname')}！</span></a></li>
-                <li><a rel="nofollow" href="{:url('index/User/index')}">收藏记录</a>
+                <li><a rel="nofollow" href="{:url('index/User/myCollect')}">收藏记录</a>
                 <li><a rel="nofollow" href="javascript:;"
                         onclick="login('修改密码','{:url('index/User/resetPwd',['id'=>session('user_id')])}','800px','360px')">修改密码</a>
                 </li>

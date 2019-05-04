@@ -1,0 +1,98 @@
+{extend name="public/base" /}
+
+{block name="seo"}
+<title>{$title|default='系统统计'}</title>
+<meta name="keywords" content="{$keywords|default='页面关键字'}">
+<meta name="description" content="{$description|default='页面描述'}">
+<style>
+    .page {
+        text-align: right;
+        font-size: 18px;
+    }
+
+    .page li {
+        display: inline-block;
+        padding: 20px 10px;
+    }
+
+    .page .active {
+        color: rgb(40, 102, 197);
+    }
+</style>
+{/block}
+
+{block name="content"}
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统统计 <span
+        class="c-gray en">&gt;</span> 饼状图 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+        href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="cl pd-5 bg-1 bk-gray" style="text-align:center;">
+        饼状图
+    </div>
+    <div id="main1" style="width:100%;height:580px;">
+    </div>
+
+</div>
+
+{/block}
+
+{block name="js"}
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/echarts/echarts.min.js"></script>
+<script>
+
+    var data1 = eval({$res});
+    var data2 = eval({$res2});
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main1'));
+
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                saveAsImage: {}
+            },
+            right: 30,
+        },
+        legend: {
+            type: 'scroll',
+            orient: 'vertical',
+            right: 50,
+            top: 30,
+            bottom: 20,
+
+            selected: data2
+        },
+        series: [
+            {
+                name: '姓名',
+                type: 'pie',
+                radius: '55%',
+                center: ['40%', '50%'],
+                data: data1,
+                selectedMode: 'single',
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    // console.log(data2);
+
+</script>
+{/block}

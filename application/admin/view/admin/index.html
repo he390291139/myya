@@ -40,7 +40,6 @@
 				<th>昵称</th>
 				<th>登录名</th>
 				<th>邮箱</th>
-				<th>加入时间</th>
 				<th>是否已启用</th>
 				<th>操作</th>
 			</tr>
@@ -53,13 +52,13 @@
 					<td>{$user.nickname}</td>
 					<td>{$user.username}</td>
 					<td>{$user.email}</td>
-					<td>{$user.createTime}</td>
 					<td class="td-status">
 						{if condition="$user.status == 1 "} <a onClick="admin_start(this,{$user.id},{$user.status})" href="javascript:;" title="点击启用" style="text-decoration:none"><span class="label label-default radius">已停用</span></a>
 							{elseif condition="$user.status == 0"/}<a style="text-decoration:none" onClick="admin_stop(this,{$user.id},{$user.status})" href="javascript:;" title="点击禁用"><span class="label label-success radius">已启用</span></a>
 						{/if}</td>
 					<td class="td-manage">
-						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{:url('admin/admin/edit',['id'=>$user.id])}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
+						<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{:url('admin/admin/edit',['id'=>$user.id])}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>
+						<a title="修改密码" href="javascript:;" onclick="admin_edit('修改密码','{:url('admin/admin/resetPwd',['id'=>$user.id])}','600','240')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>修改密码</a> 
 						<a title="删除" href="javascript:;" onclick="admin_del(this,{$user.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
 				</tr>
 			{/volist}

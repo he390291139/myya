@@ -18,7 +18,7 @@
         <form id="" role="search" action="{:url('index/Index/search')}" method="GET">
             <div class="form-group" style="margin-bottom:unset;">
                 <div class="input-group">
-                    <input id="key" name="key" type="text" class="form-control no-border input-lg no-border padder w-sm"
+                    <input id="key" name="key" type="text" class="form-control input-lg"
                         placeholder="">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-lg" style="background-color:#896741; color:white;"><i
@@ -103,7 +103,11 @@
                 <td>{$list.symptom}</td>
                 <td>{$list.tcm_diagnosis}</td>
                 <td>{$list.wes_diagnosis}</td>
-                <td text-algin="center"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></td>
+                <td class="text-center">
+                        {if condition='in_array($list.id,$collect)'}<a href="javascript:;" onclick="uncollect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star" aria-hidden="true"></i></a>
+                        {else /}<a href="javascript:;" onclick="collect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></a>
+                        {/if}
+                </td>
             </tr>
             <tr style="background-color:#f8fbfc;">
                 <td colspan="4">
@@ -145,17 +149,73 @@
             $(this).tab('show');
         });
     });
-    function borrow(book_id) {
-        layer.open({
-            type: 2,
-            title: '借书确认',
-            shadeClose: true,
-            shade: false,
-            area: ['500px', '330px'],
-            content: "borrow/book_id/" + book_id,
-            end: function () {
-                location.reload();
-            }
+    function collect(obj,ya_id,uid) {
+        layer.confirm('请确认收藏？', {
+            btn: ['确定','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            $.ajax({
+                url:"/index.php/index/user/collect/ya_id/"+ya_id+"/uid/"+uid,
+                type:"post",
+                success:function (data) {
+                    if (data==true){
+                        parent.layer.msg("收藏成功",{
+                            time:1000,
+                        });
+                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="uncollect(this,'+ya_id+','+uid+')"><i class="fa fa-star" aria-hidden="true"></i></a>');
+                    }else {
+                        parent.layer.msg(data,{
+                            time:1000,
+                        });
+
+                    }
+                },
+                error:function(){
+                    parent.layer.msg("收藏失败",{
+                        time:1000,
+                    });
+
+                }
+            });
+        }, function(){
+            parent.layer.msg('取消操作',{
+                time:500,
+            })
+        });
+    }
+
+    function uncollect(obj,ya_id,uid) {
+        layer.confirm('请确认取消收藏？', {
+            btn: ['确定','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            $.ajax({
+                url:"/index.php/index/user/uncollect/ya_id/"+ya_id+"/uid/"+uid,
+                type:"post",
+                success:function (data) {
+                    if (data==true){
+                        parent.layer.msg("取消收藏成功",{
+                            time:1000,
+                        });
+                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="collect(this,'+ya_id+','+uid+')"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></a>');
+                    }else {
+                        parent.layer.msg(data,{
+                            time:1000,
+                        });
+
+                    }
+                },
+                error:function(){
+                    parent.layer.msg("取消收藏失败",{
+                        time:1000,
+                    });
+
+                }
+            });
+        }, function(){
+            layer.msg('取消操作',{
+                time:500,
+            })
         });
     }
 </script>

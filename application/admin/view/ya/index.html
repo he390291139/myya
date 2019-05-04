@@ -5,30 +5,37 @@
 <meta name="keywords" content="{$keywords|default='页面关键字'}">
 <meta name="description" content="{$description|default='页面描述'}">
 <style>
-	.page{
+	.page {
 		text-align: right;
 		font-size: 18px;
 	}
-	.page li{
+
+	.page li {
 		display: inline-block;
 		padding: 20px 10px;
 	}
-	.page .active{
-		color: rgb(40,102,197);
+
+	.page .active {
+		color: rgb(40, 102, 197);
 	}
 </style>
 {/block}
 
 {block name="content"}
 
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 医案管理 <span class="c-gray en">&gt;</span> 医案列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 医案管理 <span
+		class="c-gray en">&gt;</span> 医案列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+		href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="cl pd-5 bg-1 bk-gray"> 
+	<div class="cl pd-5 bg-1 bk-gray">
 		<span class="l">
-			<a href="javascript:;" onclick="window.location.reload()" class="btn btn-primary btn-refresh radius"><i class="Hui-iconfont">&#xe68f;</i> 刷新</a>
-			<a href="{:url('admin/ya/index')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe681;</i> 医案列表</a>
-			<a href="{:url('admin/ya/add')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加医案</a>
-		</span> 
+			<a href="javascript:;" onclick="window.location.reload()" class="btn btn-primary btn-refresh radius"><i
+					class="Hui-iconfont">&#xe68f;</i> 刷新</a>
+			<a href="{:url('admin/ya/index')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe681;</i>
+				医案列表</a>
+			<a href="{:url('admin/ya/add')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
+				添加医案</a>
+		</span>
 		<span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
@@ -48,47 +55,52 @@
 		<tbody>
 			{volist name='list' id='user'}
 			<tr class="text-l">
-					<td><input type="checkbox" value="1" name=""></td>
-					<td>{$user.id}</td>
-					<td width="100">{$user.title}</td>
-					<td width="50">{$user.name}</td>
-					<td><b>姓名：</b>{$user.patient_name} <br>
-						<b>年龄：</b>{$user.patient_age}<br>
-						<b>性别：</b>{$user.patient_sex}<br>
-						<b>工作状态：</b>{$user.patient_status}<br>
-					</td>
-					<td>
-						<b>出诊时间：</b>	{$user.diagnose_first_time}<br>
-						<b>主诉症状：</b>	{$user.symptom}<br>
-						<b> 病 史 ：</b>	{$user.medial_history}<br>
-						<b> 刻 珍 ：</b>	{$user.carves_diagnosis}<br>
-						<b>中医诊断：</b>	{$user.tcm_diagnosis}<br>
-						<b>西医诊断：</b>	{$user.wes_diagnosis}<br>
-						<b> 科 别 ：</b>	{$user.category}<br>
-						<b>用法用量：</b>	{$user.usage}<br>
-						<b>治则治法：</b>	{$user.therapeutic_principle_and_method}<br>
-						<b> 方剂名 ：</b>	{$user.prescription}<br>
-						<b>方剂组成：</b>	{$user.prescription_composition}<br>
-						<b> 医 嘱 ：</b>	{$user.doctor_advice}<br>
-						<b> 二 诊 ：</b>	{$user.diagnosis_second}<br>
-						<b>二诊处方：</b>	{$user.diagnosis_second_recipe}<br>
-						<b> 三 诊 ：</b>	{$user.diagnosis_third}<br>
-						<b>三诊处方：</b>	{$user.diagnosis_third_recipe}<br>
-						<b> 四 诊 ：</b>	{$user.diagnosis_fourth}<br>
-						<b>四诊处方：</b>	{$user.diagnosis_fourth_recipe}<br>
-						<b> 按 语 ：</b>	{$user.note}<br>
-						<b>就诊图片：</b>	{$user.imgs}<br>
-						<b>就诊影像：</b>	{$user.video}<br>
-						<b> 出 处 ：</b>	{$user.source}<br>
-					</td>
-					<td width="50" class="td-manage">
-						<a title="编辑" href="javascript:;" onclick="admin_edit('医案编辑','{:url('admin/ya/edit',['id'=>$user.id])}','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a> 
-						<a title="删除" href="javascript:;" onclick="admin_del(this,{$user.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
-				</tr>
+				<td><input type="checkbox" value="1" name=""></td>
+				<td>{$user.id}</td>
+				<td width="100">{$user.title}</td>
+				<td width="50">{$user.name}</td>
+				<td><b>姓名：</b>{$user.patient_name} <br>
+					<b>年龄：</b>{$user.patient_age}<br>
+					<b>性别：</b>{$user.patient_sex}<br>
+					<b>工作状态：</b>{$user.patient_status}<br>
+				</td>
+				<td>
+					<b>出诊时间：</b> {$user.diagnose_first_time}<br>
+					<b>主诉症状：</b> {$user.symptom}<br>
+					<b> 病 史 ：</b> {$user.medial_history}<br>
+					<b> 刻 诊 ：</b> {$user.carves_diagnosis}<br>
+					<b>中医诊断：</b> {$user.tcm_diagnosis}<br>
+					<b>西医诊断：</b> {$user.wes_diagnosis}<br>
+					<b> 科 别 ：</b> {$user.category}<br>
+					<b>用法用量：</b> {$user.usage}<br>
+					<b>治则治法：</b> {$user.therapeutic_principle_and_method}<br>
+					<b> 方剂名 ：</b> {$user.prescription}<br>
+					<b>方剂组成：</b> {$user.prescription_composition}<br>
+					<b> 医 嘱 ：</b> {$user.doctor_advice}<br>
+					<b> 二 诊 ：</b> {$user.diagnosis_second}<br>
+					<b>二诊处方：</b> {$user.diagnosis_second_recipe}<br>
+					<b> 三 诊 ：</b> {$user.diagnosis_third}<br>
+					<b>三诊处方：</b> {$user.diagnosis_third_recipe}<br>
+					<b> 四 诊 ：</b> {$user.diagnosis_fourth}<br>
+					<b>四诊处方：</b> {$user.diagnosis_fourth_recipe}<br>
+					<b> 按 语 ：</b> {$user.note}<br>
+					<b>就诊图片：</b> <img width="80" height="80" src="__UPLOADS__/{$user.imgs}" alt=""><br>
+					<b>就诊影像：</b> <video width="320" height="240" controls>
+						<source src="__UPLOADS__/{$user.video}" type="video/mp4">
+						您的浏览器不支持 HTML5 video 标签。
+					</video><br>
+					<b> 出 处 ：</b> {$user.source}<br>
+				</td>
+				<td width="50" class="td-manage">
+					<a title="编辑" href="{:url('admin/ya/edit',['id'=>$user.id])}" class="ml-5"
+						style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>
+					<a title="删除" href="javascript:;" onclick="admin_del(this,{$user.id})" class="ml-5"
+						style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>删除</a></td>
+			</tr>
 			{/volist}
-			
+
 		</tbody>
-			
+
 	</table>
 	<div class="page">{$page}</div>
 </div>
@@ -98,52 +110,48 @@
 {block name="js"}
 <script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="__STATIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
-<script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-/*
-	参数解释：
-	title	标题
-	url		请求的url
-	id		需要操作的数据id
-	w		弹出层宽度（缺省调默认值）
-	h		弹出层高度（缺省调默认值）
-*/
-/*医案-增加*/
-function admin_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
+	/*
+		参数解释：
+		title	标题
+		url		请求的url
+		id		需要操作的数据id
+		w		弹出层宽度（缺省调默认值）
+		h		弹出层高度（缺省调默认值）
+	*/
+	/*医案-增加*/
+	function admin_add(title, url, w, h) {
+		layer_show(title, url, w, h);
+	}
 
-/*医案-删除*/
-function admin_del(obj,ids){
-	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '/index.php/admin/ya/delete/ids/'+ids,
-			dataType: 'json',
-			success: function(data){
-				if (data == true){
-					// $(obj).parents("tr").remove();
-					window.location.reload();
-					layer.msg('已删除!',{icon:1,time:1000});
-				}
-				else if(data == false){
-					layer.msg("删除失败！",{icon:5,time:1000});
-				}
-				else{
-					layer.msg(data,{icon:5,time:1000});
-				}
-			},
-			error:function(data) {
-				layer.msg(data,{icon:5,time:1000});
-			},
-		});		
-	});
-}
+	/*医案-删除*/
+	function admin_del(obj, ids) {
+		layer.confirm('确认要删除吗？', function (index) {
+			$.ajax({
+				type: 'POST',
+				url: '/index.php/admin/ya/delete/ids/' + ids,
+				dataType: 'json',
+				success: function (data) {
+					if (data == true) {
+						// $(obj).parents("tr").remove();
+						window.location.reload();
+						layer.msg('已删除!', { icon: 1, time: 1000 });
+					}
+					else if (data == false) {
+						layer.msg("删除失败！", { icon: 5, time: 1000 });
+					}
+					else {
+						layer.msg(data, { icon: 5, time: 1000 });
+					}
+				},
+				error: function (data) {
+					layer.msg(data, { icon: 5, time: 1000 });
+				},
+			});
+		});
+	}
 
-/*医案-编辑*/
-function admin_edit(title,url,w,h){
-	layer_show(title,url,w,h);
-}
 </script>
 {/block}

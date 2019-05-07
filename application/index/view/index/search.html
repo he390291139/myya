@@ -105,7 +105,7 @@
                 <td>{$list.wes_diagnosis}</td>
                 <td class="text-center">
                         {if condition='in_array($list.id,$collect)'}<a href="javascript:;" onclick="uncollect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star" aria-hidden="true"></i>取消收藏</a>
-                        {else /}<a href="javascript:;" onclick="collect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star fa-star-o" aria-hidden="true"></i>收藏</a>
+                        {else /}<a href="javascript:;" onclick="collect(this,{$list.id})"><i class="fa fa-star fa-star-o" aria-hidden="true"></i>收藏</a>
                         {/if}
                 </td>
             </tr>
@@ -149,20 +149,20 @@
             $(this).tab('show');
         });
     });
-    function collect(obj,ya_id,uid) {
+    function collect(obj,ya_id) {
         layer.confirm('请确认收藏？', {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
             $.ajax({
-                url:"/index.php/index/user/collect/ya_id/"+ya_id+"/uid/"+uid,
+                url:"/index.php/index/user/collect/ya_id/"+ya_id,
                 type:"post",
                 success:function (data) {
                     if (data==true){
                         parent.layer.msg("收藏成功",{
                             time:1000,
                         });
-                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="uncollect(this,'+ya_id+','+uid+')"><i class="fa fa-star" aria-hidden="true"></i></a>');
+                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="uncollect(this,'+ya_id+')"><i class="fa fa-star" aria-hidden="true"></i></a>');
                     }else {
                         parent.layer.msg(data,{
                             time:1000,
@@ -184,20 +184,20 @@
         });
     }
 
-    function uncollect(obj,ya_id,uid) {
+    function uncollect(obj,ya_id) {
         layer.confirm('请确认取消收藏？', {
             btn: ['确定','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
             $.ajax({
-                url:"/index.php/index/user/uncollect/ya_id/"+ya_id+"/uid/"+uid,
+                url:"/index.php/index/user/uncollect/ya_id/"+ya_id,
                 type:"post",
                 success:function (data) {
                     if (data==true){
                         parent.layer.msg("取消收藏成功",{
                             time:1000,
                         });
-                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="collect(this,'+ya_id+','+uid+')"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></a>');
+                        $(obj).parents("tr").find(".text-center").html('<a href="javascript:;" onclick="collect(this,'+ya_id+')"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></a>');
                     }else {
                         parent.layer.msg(data,{
                             time:1000,

@@ -14,7 +14,7 @@ class Index extends Base
 
         $list = Db::name('ya')->field('id,title')->order('count_num','DESC')->limit('20')->select();
         $this->assign('list',$list);
-        
+
         return $this->view->fetch();
     }
 
@@ -57,6 +57,10 @@ class Index extends Base
     
     public function yaDetail($id = null)
     {
+        $uid = session('user_id');
+        if($uid == null)
+            return $this->error('您需要登录后才可以查看医案详情！',null,'','1');
+            
         $list = Db::name('ya')->field('id,title')->order('count_num','DESC')->limit('20')->select();
         $this->assign('list',$list);
 

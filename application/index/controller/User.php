@@ -131,10 +131,11 @@ class User extends Base
         return $this->view->fetch();
     }
 
-    public function collect($ya_id = null, $uid = null)
+    public function collect($ya_id = null)
     {
+        $uid = session('user_id');
         if ($this->request->isPost()) {
-            if($uid == 'undefined')
+            if($uid == null)
                 return \json('您需要登录后才可以收藏！');
             if (!$ya_id == null and !$uid == null) {
                 $newCollect = new Collect([
@@ -153,11 +154,12 @@ class User extends Base
         return json(false);
     }
 
-    public function uncollect($ya_id = null, $uid = null)
+    public function uncollect($ya_id = null)
     {
         if ($this->request->isPost()) {
 
-            if($uid == 'undefined')
+            $uid = session('user_id');
+            if($uid == null)
                 return \json('您需要登录后才可以收藏！');
                 
             if (!$ya_id == null and !$uid == null) {

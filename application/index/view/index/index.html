@@ -105,7 +105,7 @@
         <div class="div-border bg-white text-center">
                 {volist name='list' id='list'}
                 <li class="col-sm-6" style="line-height: 2em;
-                    border-bottom: 1px dotted #abab61; display: inline-block; float: none; margin: 0px -5px 5px 0px;"><a href="{:url('index/index/yaDetail',['id'=>$list.id])}"><span>{$list.title}</span></a></li>
+                    border-bottom: 1px dotted #abab61; display: inline-block; float: none; margin: 0px -5px 5px 0px;"><a href="{:url('index/index/search',['key'=>$list.title])}"><span>{$list.title}</span></a></li>
                 {/volist}
         </div>
         <div style="height: 2em;"></div>

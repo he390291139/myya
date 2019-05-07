@@ -1,0 +1,226 @@
+{extend name="common:base" /}
+{block name="meta"}
+<title>{:getSiteInfo('site_name')}</title>
+<meta charset="utf-8" />
+<meta name="description" content="websites description" />
+<meta name="keywords" content="websited keywords" />
+
+
+{/block}
+{block name="body"}
+<!-- header begain-->
+{include file="common:header"}
+<!-- / header end-->
+
+<div class="col-sm-8 col-sm-offset-2" style="padding-top:20px;padding-bottom: 20px;">
+    <div class="col-sm-3 clear-padding">
+        <div class="tit01 title-border" style="background-color: #cfb889;">
+            <span style="padding-right:10px;">热门医案</span>
+        </div>
+
+        <div class="div-border bg-white" style="line-height:2em; padding-top: 1.2em;list-style:none;">
+            <!-- <ul style="list-style:none;"> -->
+            {volist name='list' id='list'}
+            <li style=" background-color: beige;
+                border-bottom: 1px dotted #abab61;margin-bottom: 5px;"><a href="{:url('index/index/yaDetail',['id'=>$list.id])}"><span>{$list.title}</span></a></li>
+            {/volist}
+            <!-- </ul> -->
+
+        </div>
+    
+    </div>
+    <div class="col-sm-9" style="padding-right:0px;">
+        <div class="tit01 title-border">
+            <span>医案标题 -- {$detail.title}</span>
+        </div>
+        <div class="div-border bg-white">
+            <div class="row" style="margin-top:50px;">
+                <div class="col-sm-3 col-sm-offset-1">
+                    <img src="__UPLOADS__/{$detail.imgs}" width="100%" alt="{$detail.imgs}" srcset="">
+                </div>
+                <div class="col-sm-6 " style="padding-top: 0.5em;">
+                    <div class="row">
+                        <div class="col-sm-4 text-right clear-padding" style="font-weight: bold;">患者信息&nbsp;&nbsp;</div>
+                        <div class="col-sm-8 clear-padding">
+                                <p>.</p>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-right clear-padding" style="font-weight: bold;">姓名 ：</div>
+                        <div class="col-sm-8 clear-padding">
+                            <p>{$detail.patient_name}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-right clear-padding" style="font-weight: bold;">性别 ：</div>
+                        <div class="col-sm-8 clear-padding">
+                            <p>{$detail.patient_sex}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-right clear-padding" style="font-weight: bold;"> 年龄：</div>
+                        <div class="col-sm-8 clear-padding">
+                            <p>{$detail.patient_age}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-right clear-padding" style="font-weight: bold;">工作状态 ：</div>
+                        <div class="col-sm-8 clear-padding">
+                            <p>{$detail.patient_status}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="" style="padding-top:1.2em;">
+                    <div class="tit01 title-border">
+                            <span>医案详情</span>
+                    </div>
+                    <div class="row" style="line-height:1.5em; margin-top: 2em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">出诊时间 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.diagnose_first_time}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">主诉症状 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.symptom}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 病 史  ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.medial_history}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 刻 诊  ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.carves_diagnosis}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">中医诊断 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.tcm_diagnosis}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">西医诊断 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.wes_diagnosis}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 科 别  ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.category}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">用法用量：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.usage}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">治则治法：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.therapeutic_principle_and_method}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">方剂名：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.prescription}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">方剂组成：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.prescription_composition}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 医 嘱 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.doctor_advice}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 二 诊 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.diagnosis_second}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">二诊处方：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.diagnosis_second_recipe}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 三 诊 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.diagnosis_third}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">三诊处方：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.diagnosis_third_recipe}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 四 诊 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.diagnosis_fourth}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">四诊处方：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.diagnosis_fourth_recipe}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 按 语 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.note}</p>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">就诊影像：</div>
+                        <div class="col-sm-9 clear-padding">
+                                <video width="320" height="240" controls>
+                                        <source src="__UPLOADS__/{$detail.video}" type="video/mp4">
+                                        您的浏览器不支持 HTML5 video 标签。
+                                    </video>
+                        </div>
+                    </div>
+                    <div class="row" style="line-height:1.5em;">
+                        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;"> 出 处 ：</div>
+                        <div class="col-sm-9 clear-padding">
+                            <p>{$detail.source}</p>
+                        </div>
+                    </div>
+                       
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- <div class="col-sm-8 col-sm-offset-2">
+
+</div> -->
+
+{include file="common:footer"}
+
+<script type="text/javascript" src="__STATIC__/index/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="__STATIC__/index/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script>
+
+</script>
+{/block}

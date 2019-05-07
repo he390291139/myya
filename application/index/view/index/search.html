@@ -93,19 +93,19 @@
                 <th>主诉症状</th>
                 <th>中医诊断</th>
                 <th>西医诊断</th>
-                <th> 操 作 </th>
+                <th width="110"> 操 作 </th>
             </tr>
         </thead>
         <tbody>
             {volist name='list' id='list' key="k"}
             <tr style="background-color:#e5f1f5;">
-                <td style="color:red;">{$list.title}</td>
+                <td><a href="{:url('index/index/yaDetail',['id'=>$list.id])}" style="color:red;">{$list.title}</a></td>
                 <td>{$list.symptom}</td>
                 <td>{$list.tcm_diagnosis}</td>
                 <td>{$list.wes_diagnosis}</td>
                 <td class="text-center">
-                        {if condition='in_array($list.id,$collect)'}<a href="javascript:;" onclick="uncollect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star" aria-hidden="true"></i></a>
-                        {else /}<a href="javascript:;" onclick="collect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star fa-star-o" aria-hidden="true"></i></a>
+                        {if condition='in_array($list.id,$collect)'}<a href="javascript:;" onclick="uncollect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star" aria-hidden="true"></i>取消收藏</a>
+                        {else /}<a href="javascript:;" onclick="collect(this,{$list.id},{:session('user_id')})"><i class="fa fa-star fa-star-o" aria-hidden="true"></i>收藏</a>
                         {/if}
                 </td>
             </tr>
@@ -115,7 +115,7 @@
                     {$list.prescription}
                     {$list.prescription_composition}
                 </td>
-                <td></td>
+                <td class="text-center"><a href="{:url('index/index/yaDetail',['id'=>$list.id])}">{if condition="is_null(session('user_id'))""}登录后可查看医案详情{else}查询医案详情{/if}</a></td>
             </tr>
             {/volist}
         </tbody>

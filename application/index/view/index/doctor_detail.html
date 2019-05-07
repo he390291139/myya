@@ -22,7 +22,7 @@
             <!-- <ul style="list-style:none;"> -->
             {volist name='list' id='list'}
             <li style=" background-color: beige;
-                border-bottom: 1px dotted #abab61;margin-bottom: 5px;"><a href=""><span>{$list.name}</span></a></li>
+                border-bottom: 1px dotted #abab61;margin-bottom: 5px;"><a href="{:url('index/index/doctorDetail',['id'=>$list.id])}"><span>{$list.name}</span></a></li>
             {/volist}
             <!-- </ul> -->
                 <div style="height:320px;">

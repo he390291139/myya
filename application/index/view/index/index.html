@@ -23,7 +23,7 @@
                 {php}$a=getSiteInfo('system_info');{/php}{$a|mb_substr=0,157,'utf8'}...
         </div>
     </div>
-    <div class="col-sm-8 text-center">
+    <div class="col-sm-8 text-center" style="padding-right:0px;">
         <!-- 
                                 <h1 class="text-white m-t-lg m-b-lg h2 l-h-1x animated fadeInDown">
                                     欢迎使用{:getSiteInfo('site_name')}
@@ -95,13 +95,21 @@
             </div>
         </div>
         <div style="height: 2em;"></div>
-
     </div>
 </div>
 
-<!-- <div class="col-sm-8 col-sm-offset-2">
-
-</div> -->
+<div class="col-sm-8 col-sm-offset-2">
+        <div class="tit01 title-border">
+                <span>热门医案</span>
+        </div>
+        <div class="div-border bg-white text-center">
+                {volist name='list' id='list'}
+                <li class="col-sm-6" style="line-height: 2em;
+                    border-bottom: 1px dotted #abab61; display: inline-block; float: none; margin: 0px -5px 5px 0px;"><a href="{:url('index/index/yaDetail',['id'=>$list.id])}"><span>{$list.title}</span></a></li>
+                {/volist}
+        </div>
+        <div style="height: 2em;"></div>
+</div>
 
 <div class="col-sm-8 col-sm-offset-2">
     <div class="tit01 title-border">

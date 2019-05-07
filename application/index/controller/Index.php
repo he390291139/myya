@@ -11,6 +11,10 @@ class Index extends Base
 
         $imgs = Db::name('doctor')->field('id,img')->select();
         $this->assign('imgs',$imgs);
+
+        $list = Db::name('ya')->field('id,title')->order('count_num','DESC')->limit('20')->select();
+        $this->assign('list',$list);
+        
         return $this->view->fetch();
     }
 
@@ -50,4 +54,19 @@ class Index extends Base
         return $this->view->fetch();
 
     }
+    
+    public function yaDetail($id = null)
+    {
+        $list = Db::name('ya')->field('id,title')->order('count_num','DESC')->limit('20')->select();
+        $this->assign('list',$list);
+
+        if($id == null)
+            return json('不存在该医案');
+        $detail = Db::name('ya')->where('id','=',$id)->find();
+        Db::name('ya')->where('id','=',$id)->setInc('count_num');
+        $this->assign('detail',$detail);
+
+        return $this->view->fetch();
+    }
+
 }

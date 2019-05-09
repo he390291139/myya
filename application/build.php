@@ -15,7 +15,7 @@ return [
 
     // 定义demo模块的自动生成 （按照实际定义的文件名生成）
     'index'     => [
-        'view'       => ['user/myCollect','user/resetPwd'],
+        'view'       => ['ya_api/index'],
     ],
     // 'admin'     => [
     //     'view'       => ['system/key_word_set',],

@@ -61,7 +61,7 @@ class System extends Base
     {
         if($this->request->isPost())
         {
-            $param = $this->request->param();
+            $param = $this->request->param('','','');
             
             $res = $this->model->get(['key'=> $param['key']]);
             

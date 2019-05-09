@@ -1,0 +1,50 @@
+{extend name="common:base" /}
+{block name="meta"}
+<title>{:getSiteInfo('site_name')}</title>
+<meta charset="utf-8" />
+<meta name="description" content="websites description" />
+<meta name="keywords" content="websited keywords" />
+
+
+{/block}
+{block name="body"}
+<!-- header begain-->
+{include file="common:header"}
+<!-- / header end-->
+
+<div class="col-sm-8 col-sm-offset-2" style="padding-top:10px;">
+    <h1 class="text-center">数据共享接口</h1>
+</div>
+<div class="col-sm-8 col-sm-offset-2" style="padding-top:10px;">
+
+    <div class="tit01 title-border">
+            <span>医案搜索接口</span>
+    </div>
+    <div class="row" style="line-height:1.5em; margin-top: 2em;">
+        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">请求示例 ：</div>
+        <div class="col-sm-9 clear-padding">
+            <p>{$host} &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="{$host}">点击查看示例</a></p>
+        </div>
+    </div>
+    <div class="row" style="line-height:1.5em;">
+        <div class="col-sm-3 text-right clear-padding" style="font-weight: bold;">参数说明 ：</div>
+        <div class="col-sm-9 clear-padding">
+            <p>key : 搜索关键字  必选</p>
+            <p>limit : 搜索关键字  可选</p>
+            <p>offset : 搜索关键字  可选</p>
+        </div>
+    </div>
+</div>
+
+
+
+{include file="common:footer"}
+
+<script type="text/javascript" src="__STATIC__/index/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="__STATIC__/index/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script>
+
+</script>
+{/block}
